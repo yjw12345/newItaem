@@ -892,14 +892,20 @@ onMounted(() => {
   const SVGAll: null | HTMLElement = document.querySelector("#door1");
   const SVGLeft: null | HTMLElement = document.querySelector("#door2");
   const SVGRight: null | HTMLElement = document.querySelector("#door3");
+  const SVGBOX: null | HTMLElement = document.querySelector("div.svgBox");
+  // ref 
   computedTime(TEAM1, TransitionTime);
   computedTime(TEAM2, TransitionTime);
   // 解决null不存在的问题，现在暂时使用if判断，只是不太优雅
   computedTime(TEAM4!.children, TransitionTime);
   setTimeout(() => {
-    SVGAll!.style!.display = "none";
-    SVGLeft!.style!.display = "block";
-    SVGRight!.style!.display = "block";
+    SVGAll!.style.display = "none";
+    SVGLeft!.style.display = "block";
+    SVGRight!.style.display = "block";
+    // 然后再设置过了一秒之后让其直接原地消失 
+    setTimeout(() => {
+      SVGBOX!.style.display= 'none';
+    }, 1000);
     done!();
   }, 5500);
 });
@@ -912,7 +918,7 @@ function computedTime(
   const itemTime = time / length;
   for (let i = 0; i < NodeList.length; i++) {
     const item = NodeList[i];
-    setTimeout(() => {
+    setTimeout(() => {  
       item.setAttribute("fill", "aqua");
       item.style.fill = "aqua";
     }, (i + 1) * itemTime);
@@ -925,7 +931,6 @@ function computedTime(
   position: absolute;
   top: 0;
 }
-
 .Welcome {
 }
 svg#door1 {

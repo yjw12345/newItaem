@@ -1,19 +1,40 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../views/Home/index.vue'
+import Android from '../views/Android/index.vue'
 import Enter from "@/views/Enter/index.vue"
 import Frontend from "@/views/Frontend/index.vue"
+import Footer from "@/views/Footer/index.vue"
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
       path: '/',
-      name: 'Home', 
+      component: Footer
+    },
+    {
+      path: '/enter',
+      name: 'Enter', 
       component: Enter
     },
     {
       path: '/frontend',
       name: 'Frontend',
       component: Frontend
+    },  
+    {
+      path: '/android',
+      name: 'Android',
+      component: Android
+    },  
+    {
+      path: '/home',
+      name: 'Home',
+      component: Home
+    },  
+    {
+      path: '/footer',
+      name: 'Footer',
+      component: Footer
     },  
     // {
     //   path: '/create',
