@@ -1,4 +1,9 @@
 {
+  "paths": {
+    "@/*": [
+      "src/*"
+    ]
+  },
   "compilerOptions": {
     "target": "ES2015",
     "lib": [
@@ -24,5 +29,4 @@
   "include": [
     "src"
   ]
-  
 }
