@@ -6,6 +6,8 @@
       <img src="@/assets/网站footer/朱元润.svg" alt="" />
       <img src="@/assets/网站footer/lzl.svg" alt="" />
       <img src="@/assets/网站footer/tyz.svg" alt="" />
+      <img src="@/assets/网站footer/1.svg" alt="" />
+      <img src="@/assets/网站footer/2.svg" alt="" />
     </div>
     <div class="Portal">
       <div class="done">
@@ -91,7 +93,6 @@ const qrcode = reactive([{ name: "公众号二维码", src: gongzhonghao }]);
     align-items: baseline;
     img {
       flex: 1;
-      
     }
     img:nth-of-type(1) {
       width: 299px;
@@ -112,6 +113,14 @@ const qrcode = reactive([{ name: "公众号二维码", src: gongzhonghao }]);
     img:nth-of-type(5) {
       width: 202px;
       height: 121px;
+    }
+    img:nth-of-type(6) {
+      width: 314px;
+      height: 103px;
+    }
+    img:nth-of-type(7) {
+      width: 113px;
+      height: 89px;
     }
   }
   .Portal {

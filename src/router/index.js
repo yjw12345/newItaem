@@ -4,12 +4,14 @@ import Android from '../views/Android/index.vue'
 import Enter from "@/views/Enter/index.vue"
 import Frontend from "@/views/Frontend/index.vue"
 import Footer from "@/views/Footer/index.vue"
+import AI from "@/views/AI/index.vue"
+import TimeLine from "@/views/TimeLine/index.vue"
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
       path: '/',
-      component: Footer
+      component: TimeLine
     },
     {
       path: '/enter',
@@ -35,6 +37,11 @@ const router = createRouter({
       path: '/footer',
       name: 'Footer',
       component: Footer
+    },  
+    {
+      path: '/ai',
+      name: 'AI',
+      component: AI
     },  
     // {
     //   path: '/create',
