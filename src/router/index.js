@@ -6,12 +6,13 @@ import Frontend from "@/views/Frontend/index.vue"
 import Footer from "@/views/Footer/index.vue"
 import AI from "@/views/AI/index.vue"
 import TimeLine from "@/views/TimeLine/index.vue"
+import BackEnd from "@/views/BackEnd/index.vue"
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
       path: '/',
-      component: TimeLine
+      component: BackEnd
     },
     {
       path: '/enter',
