@@ -1,36 +1,46 @@
 <template>
   <div class="Disk">
-    <div
-      class="turntable"
-      :style="tableCss"
-      ref="turntable"
-      @mousedown="tableDown"
-    >
-      <div
-        class="ball"
-        v-for="(item, index) in colorList"
-        :key="index"
-        :style="item"
-      >
-      <img draggable="false" v-if="index<headList.length-2" :src="headList[index]" alt="" srcset="">
+    <div class="turntable" :style="tableCss" ref="turntable" @mousedown="tableDown">
+      <div class="ball" v-for="(item, index) in colorList" :key="index" :style="item">
+        <img draggable="false" v-if="index<headList.length-2" :src="headList[index]" alt="" srcset="">
       </div>
     </div>
     <div class="cardList" @mousedown="ListDown" :style="ListCss">
-      <div
-        class="card"
-        v-for="(item, index) in colorList"
-        :style="item"
-        :key="index"
-      >
+      <div class="card" v-for="(item, index) in colorList" :style="item" :key="index">
         <img draggable="false" v-if="index<headList.length-2" :src="headList[index]" alt="" srcset="">
-          <p class="name">唐奕泽</p>
-          <p class="nickName">310</p>
-          <p class="phone">453912245</p>
-          <p class="detail">我就是江湖上人见人爱花见花开车见车载，人称上天入地无所不能英俊潇洒风流倜傥玉树临风学富五车高大威猛拥有千万‘粉丝’迷倒万千少女,号称一朵梨花压海棠的玉面小白龙，帅到掉榨!</p>
-          <p class="love">打篮球</p>
-          <p class="proverb">键盘敲烂，月薪过万</p>
-          <p class="target">华工&暨大</p>
+        <p class="name">唐奕泽</p>
+        <p class="nickName">310</p>
+        <p class="phone">453912245</p>
+        <p class="detail">我就是江湖上人见人爱花见花开车见车载，人称上天入地无所不能英俊潇洒风流倜傥玉树临风学富五车高大威猛拥有千万‘粉丝’迷倒万千少女,号称一朵梨花压海棠的玉面小白龙，帅到掉榨!</p>
+        <p class="love">打篮球</p>
+        <p class="proverb">键盘敲烂，月薪过万</p>
+        <p class="target">华工&暨大</p>
       </div>
+    </div>
+  </div>
+  <div class="pac-man">
+    <!-- <div class="feed">
+      <div class="feed-wrapper" ref="feedWrapper">
+        <div v-for="(item,index) in feedList" :key="index">
+          <img :src="getLogoUrl(item)" alt="" :id="index" class="feed-item">
+        </div>
+      </div>
+    </div> -->
+    <div class="slider">
+      <div class="slide-track">
+        <div v-for="(item,index) in feedList" :key="index" class="slide">
+          <img :src="getLogoUrl(item)" alt="" :id="index" class="feed-item">
+        </div>
+      </div>
+    </div>
+    <div class="pacman-total">
+      <div class="pacman-top"></div>
+      <div class="pacman-bottom"></div>
+    </div>
+    <div class="money">
+      <p>the more you learn,the more you gain</p>
+      <div class="count">${{money}}</div>
+
     </div>
   </div>
 </template>
@@ -38,7 +48,7 @@
 <script setup lang='ts'>
 import { reactive, Ref, ref } from "@vue/reactivity";
 import { computed, onMounted } from "@vue/runtime-core";
-const imgList=["黄徽冠","奕泽","元润","远健","振壹"]
+const imgList = ["黄徽冠", "奕泽", "元润", "远健", "振壹"];
 const colorList = reactive([
   "background-image: linear-gradient(to top, #fddb92 0%, #d1fdff 100%);",
   "background-image: linear-gradient(to top, #a18cd1 0%, #fbc2eb 100%);",
@@ -47,27 +57,45 @@ const colorList = reactive([
   "background-image: linear-gradient(to top, #7028e4 0%, #e5b2ca 100%);",
   "background-image: linear-gradient(to top, #0c3483 0%, #a2b6df 100%, #6b8cce 100%, #a2b6df 100%);",
 ]);
-const headList=[]
+const headList: any[] = [];
 for (let i = 0; i < imgList.length; i++) {
   const el = imgList[i];
-  headList.push(getImageUrl(el))
+  headList.push(getImageUrl(el));
 }
 for (let i = imgList.length; i < colorList.length; i++) {
   const el = colorList[i];
-  headList.push(el)
+  headList.push(el);
 }
-if(imgList.length<6){
-  headList.push(colorList)
+if (imgList.length < 6) {
+  headList.push(colorList);
 }
-function getImageUrl(name:string) {
-  return new URL(`./后端头像/${name}.jpg`, import.meta.url).href
-}
-let tupian=getImageUrl("黄徽冠")
 
-onMounted(()=>{
-console.log(tupian);
+/* 后端技术栈logo*/
+/*-----------Start------------ */
+const getLogoUrl = (name: String) => {
+  return new URL(`../../assets/backEnd-tech-logo/${name}`, import.meta.url)
+    .href;
+};
+const feedList: any[] = [
+  "go.jpg",
+  "hutool.jpg",
+  "java.jpg",
+  "spring.png",
+  "mysql.jpg",
+  "go.jpg",
+  "java.jpg",
+  "spring.png",
+  "mysql.jpg",
+];
+const money: Ref<HTMLElement | any> = ref(3000);
 
-})
+/*-----------End----------- */
+
+function getImageUrl(name: string) {
+  return new URL(`./后端头像/${name}.jpg`, import.meta.url).href;
+}
+let tupian = getImageUrl("黄徽冠");
+const feedMoveList: any[] = [];
 // 获取圆心的位置
 type Circle = {
   X: number;
@@ -86,6 +114,12 @@ const turntable: Ref<HTMLElement | null> = ref(null);
 onMounted(() => {
   circle.X = turntable.value!.offsetLeft + 225;
   circle.Y = turntable.value!.offsetTop + 225;
+  const timer = setInterval(() => {
+    money.value += Math.floor(Math.random() * 20);
+    if (money.value == 30000) {
+      clearInterval(timer);
+    }
+  }, 10);
 });
 // 求角度的办法
 function getAngle(x: number, y: number) {
@@ -133,7 +167,6 @@ function tableRestore() {
 // 初始化lastX
 // 这个radius不是半径，可以理解为旋转周期，移动300px就更换60deg
 let flag = false;
-
 const ListCss = computed(() => {
   const time = flag ? "transition-duration:500ms;" : "";
   return `transform: rotateY(${data.deg % 360}deg);` + time;
@@ -168,7 +201,7 @@ function restore() {
 }
 </script>
 
-<style lang='scss' >
+<style lang='scss' scoped>
 // @function ball($num){
 //   @return 60*$num
 // }
@@ -190,6 +223,7 @@ div.Disk {
   justify-content: space-between;
   align-items: center;
   margin-top: 200px;
+  overflow: hidden;
 }
 .turntable {
   width: 450px;
@@ -206,7 +240,7 @@ div.Disk {
     border-radius: 50%;
     background: #169fe6;
     transform-origin: 225px 225px;
-    img{
+    img {
       width: 100%;
       height: 100%;
     }
@@ -255,7 +289,7 @@ div.Disk {
     border-radius: 14px;
     box-shadow: -1px 15px 30px -12px black;
     // box-shadow: 20px 20px 60px black, -20px -20px 60px black;
-    img{
+    img {
       width: 50px;
       height: 50px;
       border-radius: 50%;
@@ -289,5 +323,156 @@ div.Disk {
   div:hover {
     box-shadow: 0 0 30px #169fe6;
   }
+}
+
+/* pacman's css */
+.pac-man {
+  display: flex;
+  width: 1200px;
+  margin: 0 auto;
+  margin-bottom: 200px;
+}
+.pacman-total {
+  margin-top: 100px;
+  z-index: 999;
+}
+
+.pacman-top {
+  background-color: yellow;
+  height: 100px;
+  width: 200px;
+  border-radius: 100px 100px 0 0;
+  animation: spin1 0.5s infinite linear;
+}
+
+.pacman-bottom {
+  background-color: yellow;
+  height: 100px;
+  width: 200px;
+  border-radius: 0 0 100px 100px;
+  animation: spin2 0.5s infinite linear;
+}
+/*pacman's animation*/
+@keyframes spin2 {
+  0% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(-35deg);
+  }
+}
+@keyframes spin1 {
+  0% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(35deg);
+  }
+}
+
+@-moz-keyframes spin2 {
+  0% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(-35deg);
+  }
+}
+@-moz-keyframes spin1 {
+  0% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(35deg);
+  }
+}
+
+@-webkit-keyframes spin2 {
+  0% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(-35deg);
+  }
+}
+@-webkit-keyframes spin1 {
+  0% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(35deg);
+  }
+}
+
+@mixin white-gradient {
+  background: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 1) 0%,
+    rgba(255, 255, 255, 0) 100%
+  );
+}
+
+$animationSpeed: 10s;
+
+// Animation
+@keyframes scroll {
+  100% {
+    transform: translateX(0);
+  }
+  0% {
+    transform: translateX(calc(-250px * 5));
+  }
+}
+// Styling
+.slider {
+  background: white;
+  //box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.125);
+  height: 100px;
+  overflow: hidden;
+  position: relative;
+  width: 660px;
+  margin-top: 130px;
+  &::before,
+  &::after {
+    @include white-gradient;
+    content: "";
+    height: 100px;
+    position: absolute;
+    width: 200px;
+    z-index: 2;
+  }
+
+  &::after {
+    right: 0;
+    top: 0;
+    transform: rotateZ(180deg);
+  }
+
+  &::before {
+    left: 0;
+    top: 0;
+  }
+
+  .slide-track {
+    animation: scroll $animationSpeed linear infinite;
+    display: flex;
+    width: calc(250px * 14);
+  }
+
+  .slide {
+    height: 100px;
+    width: 250px;
+    img {
+      width: 100px;
+      height: 100px;
+      margin: 0 20px;
+      // transform: translateX(-50px);
+    }
+  }
+}
+.money {
+  font-size: 30px;
+  font-weight: 700;
+  margin-top: 100px;
 }
 </style>
