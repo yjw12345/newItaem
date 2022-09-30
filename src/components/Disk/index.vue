@@ -116,9 +116,9 @@ onMounted(() => {
   circle.Y = turntable.value!.offsetTop + 225;
   const timer = setInterval(() => {
     money.value += Math.floor(Math.random() * 20);
-    if (money.value == 30000) {
+   /*  if (money.value == 30000) {
       clearInterval(timer);
-    }
+    } */
   }, 10);
 });
 // 求角度的办法
