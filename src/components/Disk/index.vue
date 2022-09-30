@@ -1,5 +1,5 @@
 <template>
-  <div class="Disk">
+  <div class="Disk" ref="Disk">
     <div
       class="turntable"
       :style="tableCss"
@@ -12,24 +12,40 @@
         :key="index"
         :style="item"
       >
-      <img draggable="false" v-if="index<headList.length-2" :src="headList[index]" alt="" srcset="">
+        <img
+          draggable="false"
+          v-if="index < headList.length - 2"
+          :src="headList[index]"
+          alt=""
+          srcset=""
+        />
       </div>
     </div>
-    <div class="cardList" @mousedown="ListDown" :style="ListCss">
-      <div
-        class="card"
-        v-for="(item, index) in colorList"
-        :style="item"
-        :key="index"
-      >
-        <img draggable="false" v-if="index<headList.length-2" :src="headList[index]" alt="" srcset="">
+    <div class="CardShow">
+      <div class="cardList" @mousedown="ListDown" :style="ListCss">
+        <div
+          class="card"
+          v-for="(item, index) in colorList"
+          :style="item"
+          :key="index"
+        >
+          <img
+            draggable="false"
+            v-if="index < headList.length - 2"
+            :src="headList[index]"
+            alt=""
+            srcset=""
+          />
           <p class="name">唐奕泽</p>
           <p class="nickName">310</p>
           <p class="phone">453912245</p>
-          <p class="detail">我就是江湖上人见人爱花见花开车见车载，人称上天入地无所不能英俊潇洒风流倜傥玉树临风学富五车高大威猛拥有千万‘粉丝’迷倒万千少女,号称一朵梨花压海棠的玉面小白龙，帅到掉榨!</p>
+          <p class="detail">
+            我就是江湖上人见人爱花见花开车见车载，人称上天入地无所不能英俊潇洒风流倜傥玉树临风学富五车高大威猛拥有千万‘粉丝’迷倒万千少女,号称一朵梨花压海棠的玉面小白龙，帅到掉榨!
+          </p>
           <p class="love">打篮球</p>
           <p class="proverb">键盘敲烂，月薪过万</p>
           <p class="target">华工&暨大</p>
+        </div>
       </div>
     </div>
   </div>
@@ -38,7 +54,7 @@
 <script setup lang='ts'>
 import { reactive, Ref, ref } from "@vue/reactivity";
 import { computed, onMounted } from "@vue/runtime-core";
-const imgList=["黄徽冠","奕泽","元润","远健","振壹"]
+const imgList = ["黄徽冠", "奕泽", "元润", "远健", "振壹"];
 const colorList = reactive([
   "background-image: linear-gradient(to top, #fddb92 0%, #d1fdff 100%);",
   "background-image: linear-gradient(to top, #a18cd1 0%, #fbc2eb 100%);",
@@ -47,27 +63,28 @@ const colorList = reactive([
   "background-image: linear-gradient(to top, #7028e4 0%, #e5b2ca 100%);",
   "background-image: linear-gradient(to top, #0c3483 0%, #a2b6df 100%, #6b8cce 100%, #a2b6df 100%);",
 ]);
-const headList=[]
+const headList = [];
+const Disk: Ref<HTMLElement | null> = ref(null);
+
 for (let i = 0; i < imgList.length; i++) {
   const el = imgList[i];
-  headList.push(getImageUrl(el))
+  headList.push(getImageUrl(el));
 }
 for (let i = imgList.length; i < colorList.length; i++) {
   const el = colorList[i];
-  headList.push(el)
+  headList.push(el);
 }
-if(imgList.length<6){
-  headList.push(colorList)
+if (imgList.length < 6) {
+  headList.push(colorList);
 }
-function getImageUrl(name:string) {
-  return new URL(`./后端头像/${name}.jpg`, import.meta.url).href
+function getImageUrl(name: string) {
+  return new URL(`./后端头像/${name}.jpg`, import.meta.url).href;
 }
-let tupian=getImageUrl("黄徽冠")
+let tupian = getImageUrl("黄徽冠");
 
-onMounted(()=>{
-console.log(tupian);
-
-})
+onMounted(() => {
+  console.log(tupian);
+});
 // 获取圆心的位置
 type Circle = {
   X: number;
@@ -84,8 +101,10 @@ let turnflag = false;
 const turntable: Ref<HTMLElement | null> = ref(null);
 
 onMounted(() => {
-  circle.X = turntable.value!.offsetLeft + 225;
-  circle.Y = turntable.value!.offsetTop + 225;
+  console.log(turntable.value);
+  circle.X = turntable.value!.offsetLeft + 60 + Disk.value!.offsetLeft;
+  circle.Y = turntable.value!.offsetTop + 60 + Disk.value!.offsetTop;
+  console.log(circle);
 });
 // 求角度的办法
 function getAngle(x: number, y: number) {
@@ -172,122 +191,97 @@ function restore() {
 // @function ball($num){
 //   @return 60*$num
 // }
-// @mixin ball($num) {
-//   .ball:nth-of-type($num) {
-//     transform: rotate($num * 60deg) translateX(183px) translateY(22px);
-//   }
-// }
-// @include ball(1);
-// @include ball(2);
-// @include ball(3);
-// @include ball(4);
-// @include ball(5);
-// @include ball(6);
+
 div.Disk {
-  width: 1200px;
+  width: 400px;
+  height: 400px;
   margin: 0 auto;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 200px;
+  position: relative;
 }
 .turntable {
-  width: 450px;
-  height: 450px;
+  $Width: 120px;
+  position: absolute;
+  z-index: 10;
+  left: -60px;
+  top: 55px;
+  width: $Width;
+  height: $Width;
   border-radius: 50%;
   background-color: black;
   // margin: 200px auto;
   position: relative;
   transform: rotate(180deg);
   .ball {
+    $ballWidth: 35px;
     position: absolute;
-    width: 112px;
-    height: 112px;
+    width: $ballWidth;
+    height: $ballWidth;
     border-radius: 50%;
     background: #169fe6;
-    transform-origin: 225px 225px;
-    img{
+    transform-origin: $Width/2 $Width/2;
+    img {
       width: 100%;
       height: 100%;
-    }
-  }
-  // md，这里本来想用scss生成器的，结果他妈的搞不出来
-
-  .ball:nth-of-type(2) {
-    transform: rotate(60deg) translateX(183px) translateY(22px);
-  }
-  .ball:nth-of-type(3) {
-    transform: rotate(120deg) translateX(183px) translateY(22px);
-  }
-  .ball:nth-of-type(4) {
-    transform: rotate(180deg) translateX(183px) translateY(22px);
-  }
-  .ball:nth-of-type(5) {
-    transform: rotate(240deg) translateX(183px) translateY(22px);
-  }
-  .ball:nth-of-type(6) {
-    transform: rotate(300deg) translateX(183px) translateY(22px);
-  }
-  .ball:nth-of-type(1) {
-    transform: rotate(360deg) translateX(183px) translateY(22px);
-  }
-}
-.cardList {
-  position: relative;
-  // margin: 200px auto;
-  margin-right: 70px;
-  width: 300px;
-  height: 380px;
-  transform-style: preserve-3d;
-  //   animation: rotate 10s linear infinite;
-  &:hover {
-    animation-play-state: paused;
-  }
-  .card {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 300px;
-    height: 380px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    border-radius: 14px;
-    box-shadow: -1px 15px 30px -12px black;
-    // box-shadow: 20px 20px 60px black, -20px -20px 60px black;
-    img{
-      width: 50px;
-      height: 50px;
       border-radius: 50%;
     }
   }
-  div:nth-child(1) {
-    transform: translateZ(400px);
+  // md，这里本来想用scss生成器的，结果他妈的搞不出来
+  @mixin ball($num) {
+    @for $var from 1 through $num {
+      .ball:nth-of-type(#{$var}) {
+        transform: rotate(($var + 1) * 60deg) translateX(20px) translateY(12px);
+      }
+    }
   }
+  @include ball(6);
+}
+.CardShow {
+  $Width: 300px;
+  $Height: 380px;
+  border-radius: 14px;  
+  width: $Width;
+  height: $Height;
+  overflow: hidden;
+  .cardList {
+    position: relative;
+    // margin: 200px auto;
+    margin-right: 70px;
+    width: $Width;
+    height: $Height;
+    transform-style: preserve-3d;
+    &:hover {
+      animation-play-state: paused;
+    }
+    .card {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: $Width;
+      height: $Height;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      border-radius: 14px;
+      box-shadow: -1px 15px 30px -12px black;
+      // box-shadow: 20px 20px 60px black, -20px -20px 60px black;
+      img {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+      }
+    }
+    @mixin cardSon($num) {
+      @for $ing from 1 through $num {
+        div:nth-child(#{$ing}) {
+          transform: rotateY(($ing - 1) * 60deg) translateZ(400px);
+        }
+      }
+    }
+    @include cardSon(6);
 
-  div:nth-child(2) {
-    /* 先旋转，再移动 */
-    transform: rotateY(60deg) translateZ(400px);
-  }
-
-  div:nth-child(3) {
-    transform: rotateY(120deg) translateZ(400px);
-  }
-
-  div:nth-child(4) {
-    transform: rotateY(180deg) translateZ(400px);
-  }
-
-  div:nth-child(5) {
-    transform: rotateY(240deg) translateZ(400px);
-  }
-
-  div:nth-child(6) {
-    transform: rotateY(300deg) translateZ(400px);
-  }
-
-  div:hover {
-    box-shadow: 0 0 30px #169fe6;
+    div:hover {
+      box-shadow: 0 0 30px #169fe6;
+    }
   }
 }
 </style>
