@@ -13,7 +13,7 @@ const router = createRouter({
   routes: [
     {
       path: '/',
-      component: n
+      component: BackEnd
     },
     {
       path: '/enter',

@@ -49,6 +49,31 @@
       </div>
     </div>
   </div>
+  <div class="pac-man">
+    <!-- <div class="feed">
+      <div class="feed-wrapper" ref="feedWrapper">
+        <div v-for="(item,index) in feedList" :key="index">
+          <img :src="getLogoUrl(item)" alt="" :id="index" class="feed-item">
+        </div>
+      </div>
+    </div> -->
+    <div class="slider">
+      <div class="slide-track">
+        <div v-for="(item,index) in feedList" :key="index" class="slide">
+          <img :src="getLogoUrl(item)" alt="" :id="index" class="feed-item">
+        </div>
+      </div>
+    </div>
+    <div class="pacman-total">
+      <div class="pacman-top"></div>
+      <div class="pacman-bottom"></div>
+    </div>
+    <div class="money">
+      <p>the more you learn,the more you gain</p>
+      <div class="count">${{money}}</div>
+
+    </div>
+  </div>
 </template>
 
 <script setup lang='ts'>
@@ -66,6 +91,7 @@ const colorList = reactive([
 const headList = [];
 const Disk: Ref<HTMLElement | null> = ref(null);
 
+// const headList: any[] = [];
 for (let i = 0; i < imgList.length; i++) {
   const el = imgList[i];
   headList.push(getImageUrl(el));
@@ -85,6 +111,28 @@ let tupian = getImageUrl("黄徽冠");
 onMounted(() => {
   console.log(tupian);
 });
+
+
+/* 后端技术栈logo*/
+/*-----------Start------------ */
+const getLogoUrl = (name: String) => {
+  return new URL(`../../assets/backEnd-tech-logo/${name}`, import.meta.url)
+    .href;
+};
+const feedList: any[] = [
+  "go.jpg",
+  "hutool.jpg",
+  "java.jpg",
+  "spring.png",
+  "mysql.jpg",
+  "go.jpg",
+  "java.jpg",
+  "spring.png",
+  "mysql.jpg",
+];
+const money: Ref<HTMLElement | any> = ref(3000);
+
+/*-----------End----------- */
 // 获取圆心的位置
 type Circle = {
   X: number;
@@ -152,7 +200,6 @@ function tableRestore() {
 // 初始化lastX
 // 这个radius不是半径，可以理解为旋转周期，移动300px就更换60deg
 let flag = false;
-
 const ListCss = computed(() => {
   const time = flag ? "transition-duration:500ms;" : "";
   return `transform: rotateY(${data.deg % 360}deg);` + time;
@@ -187,7 +234,7 @@ function restore() {
 }
 </script>
 
-<style lang='scss' >
+<style lang='scss' scoped>
 // @function ball($num){
 //   @return 60*$num
 // }
@@ -283,5 +330,156 @@ div.Disk {
       box-shadow: 0 0 30px #169fe6;
     }
   }
+}
+
+/* pacman's css */
+.pac-man {
+  display: flex;
+  width: 1200px;
+  margin: 0 auto;
+  margin-bottom: 200px;
+}
+.pacman-total {
+  margin-top: 100px;
+  z-index: 999;
+}
+
+.pacman-top {
+  background-color: yellow;
+  height: 100px;
+  width: 200px;
+  border-radius: 100px 100px 0 0;
+  animation: spin1 0.5s infinite linear;
+}
+
+.pacman-bottom {
+  background-color: yellow;
+  height: 100px;
+  width: 200px;
+  border-radius: 0 0 100px 100px;
+  animation: spin2 0.5s infinite linear;
+}
+/*pacman's animation*/
+@keyframes spin2 {
+  0% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(-35deg);
+  }
+}
+@keyframes spin1 {
+  0% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(35deg);
+  }
+}
+
+@-moz-keyframes spin2 {
+  0% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(-35deg);
+  }
+}
+@-moz-keyframes spin1 {
+  0% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(35deg);
+  }
+}
+
+@-webkit-keyframes spin2 {
+  0% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(-35deg);
+  }
+}
+@-webkit-keyframes spin1 {
+  0% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(35deg);
+  }
+}
+
+@mixin white-gradient {
+  background: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 1) 0%,
+    rgba(255, 255, 255, 0) 100%
+  );
+}
+
+$animationSpeed: 10s;
+
+// Animation
+@keyframes scroll {
+  100% {
+    transform: translateX(0);
+  }
+  0% {
+    transform: translateX(calc(-250px * 5));
+  }
+}
+// Styling
+.slider {
+  background: white;
+  //box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.125);
+  height: 100px;
+  overflow: hidden;
+  position: relative;
+  width: 660px;
+  margin-top: 130px;
+  &::before,
+  &::after {
+    @include white-gradient;
+    content: "";
+    height: 100px;
+    position: absolute;
+    width: 200px;
+    z-index: 2;
+  }
+
+  &::after {
+    right: 0;
+    top: 0;
+    transform: rotateZ(180deg);
+  }
+
+  &::before {
+    left: 0;
+    top: 0;
+  }
+
+  .slide-track {
+    animation: scroll $animationSpeed linear infinite;
+    display: flex;
+    width: calc(250px * 14);
+  }
+
+  .slide {
+    height: 100px;
+    width: 250px;
+    img {
+      width: 100px;
+      height: 100px;
+      margin: 0 20px;
+      // transform: translateX(-50px);
+    }
+  }
+}
+.money {
+  font-size: 30px;
+  font-weight: 700;
+  margin-top: 100px;
 }
 </style>
