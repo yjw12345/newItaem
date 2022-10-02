@@ -1,4 +1,5 @@
 <template>
+  <div id="backend">
   <div class="Disk">
     <div class="turntable" :style="tableCss" ref="turntable" @mousedown="tableDown">
       <div class="ball" v-for="(item, index) in colorList" :key="index" :style="item">
@@ -43,6 +44,7 @@
 
     </div>
   </div>
+</div>
 </template>
 
 <script setup lang='ts'>
@@ -110,16 +112,21 @@ const circle: Circle = { X: 1, Y: 1 };
 // 转盘的flag
 let turnflag = false;
 const turntable: Ref<HTMLElement | null> = ref(null);
+const addMoney = ()=>{
+  money.value += 11;
+  if (money.value >= 30000) {
+      money.value = 0;
+    }
+}
+
+/* else {
+     
+    } */
 
 onMounted(() => {
   circle.X = turntable.value!.offsetLeft + 225;
   circle.Y = turntable.value!.offsetTop + 225;
-  const timer = setInterval(() => {
-    money.value += Math.floor(Math.random() * 20);
-   /*  if (money.value == 30000) {
-      clearInterval(timer);
-    } */
-  }, 10);
+  const timer = setInterval(addMoney, 10);
 });
 // 求角度的办法
 function getAngle(x: number, y: number) {
@@ -216,6 +223,9 @@ function restore() {
 // @include ball(4);
 // @include ball(5);
 // @include ball(6);
+#backend{
+ // background-color: #000;
+}
 div.Disk {
   width: 1200px;
   margin: 0 auto;
@@ -333,24 +343,24 @@ div.Disk {
   margin-bottom: 200px;
 }
 .pacman-total {
-  margin-top: 100px;
+  margin-top: 70px;
   z-index: 999;
 }
 
 .pacman-top {
   background-color: yellow;
-  height: 100px;
-  width: 200px;
-  border-radius: 100px 100px 0 0;
-  animation: spin1 0.5s infinite linear;
+  height: 120px;
+  width: 240px;
+  border-radius: 120px 120px 0 0;
+  animation: spin1 1s infinite linear;
 }
 
 .pacman-bottom {
   background-color: yellow;
-  height: 100px;
-  width: 200px;
-  border-radius: 0 0 100px 100px;
-  animation: spin2 0.5s infinite linear;
+  height: 120px;
+  width: 240px;
+  border-radius: 0 0 120px 120px;
+  animation: spin2 1s infinite linear;
 }
 /*pacman's animation*/
 @keyframes spin2 {
@@ -404,28 +414,28 @@ div.Disk {
   }
 }
 
-@mixin white-gradient {
-  background: linear-gradient(
-    to right,
-    rgba(255, 255, 255, 1) 0%,
-    rgba(255, 255, 255, 0) 100%
-  );
-}
-
-$animationSpeed: 10s;
+$animationSpeed: 4s;
 
 // Animation
 @keyframes scroll {
+
+  0% {
+    transform: translateX(calc(-250px * 7));
+    transform: scale(1);
+  }
+  50%{
+    transform: translateX(calc(-250px*3.5));
+    transform: scale(0.7);
+  }
   100% {
     transform: translateX(0);
+    transform: scale(0.5);
   }
-  0% {
-    transform: translateX(calc(-250px * 5));
-  }
+
 }
 // Styling
 .slider {
-  background: white;
+  background: transparent;
   //box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.125);
   height: 100px;
   overflow: hidden;
@@ -434,7 +444,6 @@ $animationSpeed: 10s;
   margin-top: 130px;
   &::before,
   &::after {
-    @include white-gradient;
     content: "";
     height: 100px;
     position: absolute;
@@ -454,7 +463,8 @@ $animationSpeed: 10s;
   }
 
   .slide-track {
-    animation: scroll $animationSpeed linear infinite;
+    // animation: scroll $animationSpeed linear infinite ;
+    
     display: flex;
     width: calc(250px * 14);
   }
@@ -463,9 +473,10 @@ $animationSpeed: 10s;
     height: 100px;
     width: 250px;
     img {
-      width: 100px;
-      height: 100px;
-      margin: 0 20px;
+      width: 80px;
+      height: 80px;
+      margin: 10px 20px;
+
       // transform: translateX(-50px);
     }
   }

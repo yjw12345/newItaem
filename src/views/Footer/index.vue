@@ -58,7 +58,7 @@
   </div>
 </template>
 
-<script setup lang='ts'>
+<script setup>
 import gongzhonghao from "@/assets/二维码/公众号.jpg";
 import { reactive } from "@vue/reactivity";
 const done = reactive([
