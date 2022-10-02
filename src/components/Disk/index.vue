@@ -33,31 +33,8 @@
         </div>
       </div>
     </div>
-  </div>
-  <div class="pac-man">
-    <!-- <div class="feed">
-      <div class="feed-wrapper" ref="feedWrapper">
-        <div v-for="(item,index) in feedList" :key="index">
-          <img :src="getLogoUrl(item)" alt="" :id="index" class="feed-item">
-        </div>
-      </div>
-    </div> -->
-    <div class="slider">
-      <div class="slide-track">
-        <div v-for="(item,index) in feedList" :key="index" class="slide">
-          <img :src="getLogoUrl(item)" alt="" :id="index" class="feed-item">
-        </div>
-      </div>
-    </div>
-    <div class="pacman-total">
-      <div class="pacman-top"></div>
-      <div class="pacman-bottom"></div>
-    </div>
-    <div class="money">
-      <p>the more you learn,the more you gain</p>
-      <div class="count">${{money}}</div>
-
-    </div>
+  
+ 
   </div>
 </div>
 </template>
@@ -74,7 +51,7 @@ const colorList = reactive([
   "background-image: linear-gradient(to top, #7028e4 0%, #e5b2ca 100%);",
   "background-image: linear-gradient(to top, #0c3483 0%, #a2b6df 100%, #6b8cce 100%, #a2b6df 100%);",
 ]);
-const headList = [];
+const headList:any = [];
 const Disk: Ref<HTMLElement | null> = ref(null);
 
 // const headList: any[] = [];
@@ -94,10 +71,6 @@ function getImageUrl(name: string) {
 }
 let tupian = getImageUrl("黄徽冠");
 
-onMounted(() => {
-  console.log(tupian);
-});
-
 
 /* 后端技术栈logo*/
 /*-----------Start------------ */
@@ -116,7 +89,7 @@ const feedList: any[] = [
   "spring.png",
   "mysql.jpg",
 ];
-const money: Ref<HTMLElement | any> = ref(3000);
+
 
 /*-----------End----------- */
 // 获取圆心的位置
@@ -133,21 +106,11 @@ const circle: Circle = { X: 1, Y: 1 };
 // 转盘的flag
 let turnflag = false;
 const turntable: Ref<HTMLElement | null> = ref(null);
-const addMoney = ()=>{
-  money.value += 11;
-  if (money.value >= 30000) {
-      money.value = 0;
-    }
-}
-
-/* else {
-     
-    } */
 
 onMounted(() => {
   circle.X = turntable.value!.offsetLeft + 225;
   circle.Y = turntable.value!.offsetTop + 225;
-  const timer = setInterval(addMoney, 10);
+
 });
 // 求角度的办法
 function getAngle(x: number, y: number) {
@@ -244,9 +207,6 @@ function restore() {
 // @include ball(4);
 // @include ball(5);
 // @include ball(6);
-#backend{
- // background-color: #000;
-}
 div.Disk {
   width: 400px;
   height: 400px;
@@ -340,155 +300,4 @@ div.Disk {
   }
 }
 
-/* pacman's css */
-.pac-man {
-  display: flex;
-  width: 1200px;
-  margin: 0 auto;
-  margin-bottom: 200px;
-}
-.pacman-total {
-  margin-top: 70px;
-  z-index: 999;
-}
-
-.pacman-top {
-  background-color: yellow;
-  height: 120px;
-  width: 240px;
-  border-radius: 120px 120px 0 0;
-  animation: spin1 1s infinite linear;
-}
-
-.pacman-bottom {
-  background-color: yellow;
-  height: 120px;
-  width: 240px;
-  border-radius: 0 0 120px 120px;
-  animation: spin2 1s infinite linear;
-}
-/*pacman's animation*/
-@keyframes spin2 {
-  0% {
-    transform: rotate(0deg);
-  }
-  50% {
-    transform: rotate(-35deg);
-  }
-}
-@keyframes spin1 {
-  0% {
-    transform: rotate(0deg);
-  }
-  50% {
-    transform: rotate(35deg);
-  }
-}
-
-@-moz-keyframes spin2 {
-  0% {
-    transform: rotate(0deg);
-  }
-  50% {
-    transform: rotate(-35deg);
-  }
-}
-@-moz-keyframes spin1 {
-  0% {
-    transform: rotate(0deg);
-  }
-  50% {
-    transform: rotate(35deg);
-  }
-}
-
-@-webkit-keyframes spin2 {
-  0% {
-    transform: rotate(0deg);
-  }
-  50% {
-    transform: rotate(-35deg);
-  }
-}
-@-webkit-keyframes spin1 {
-  0% {
-    transform: rotate(0deg);
-  }
-  50% {
-    transform: rotate(35deg);
-  }
-}
-
-$animationSpeed: 4s;
-
-// Animation
-@keyframes scroll {
-
-  0% {
-    transform: translateX(calc(-250px * 7));
-    transform: scale(1);
-  }
-  50%{
-    transform: translateX(calc(-250px*3.5));
-    transform: scale(0.7);
-  }
-  100% {
-    transform: translateX(0);
-    transform: scale(0.5);
-  }
-
-}
-// Styling
-.slider {
-  background: transparent;
-  //box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.125);
-  height: 100px;
-  overflow: hidden;
-  position: relative;
-  width: 660px;
-  margin-top: 130px;
-  &::before,
-  &::after {
-    content: "";
-    height: 100px;
-    position: absolute;
-    width: 200px;
-    z-index: 2;
-  }
-
-  &::after {
-    right: 0;
-    top: 0;
-    transform: rotateZ(180deg);
-  }
-
-  &::before {
-    left: 0;
-    top: 0;
-  }
-
-  .slide-track {
-    // animation: scroll $animationSpeed linear infinite ;
-    
-    display: flex;
-    width: calc(250px * 14);
-  }
-
-  .slide {
-    height: 100px;
-    width: 250px;
-    img {
-      width: 80px;
-      height: 80px;
-      margin: 10px 20px;
-
-      // transform: translateX(-50px);
-    }
-  }
-}
-.money {
-  font-size: 30px;
-  font-weight: 700;
-  margin-top: 100px;
-}
 </style>

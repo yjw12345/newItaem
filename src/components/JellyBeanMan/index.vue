@@ -45,8 +45,15 @@ const feedList: any[] = [
 
 const money: Ref<HTMLElement | any> = ref(3000);
 
+const addMoney = () => {
+  money.value += 11;
+  if (money.value >= 30000) {
+    money.value = 0;
+  }
+};
 const changeSize = () => {};
 onMounted(() => {
+  const timer = setInterval(addMoney, 10);
   const func1 = () => {
     for (let i = 5; i < item.value.length; i++) {
       for (let j = 5; j > 0; j--) {
@@ -82,7 +89,7 @@ onMounted(() => {
     for (let i = 0; i < 3; i++) {
       for (let j = 4; j > 0; j--) {
         if (i + j == 4) {
-          // clearInterval(timer2);
+
           item.value[i].style.transform = "scale(" + 0.2 * j + ")";
         }
       }
@@ -104,9 +111,9 @@ onMounted(() => {
 </script>
 
 <style lang="scss">
-  #pacman{
-    background-color: skyblue;
-  }
+#pacman {
+  background-color: skyblue;
+}
 /* pacman's css */
 .pac-man {
   display: flex;
@@ -221,8 +228,4 @@ $animationSpeed: 4s;
   }
 }
 
-.test {
-  transform: scale(0.5);
-}
-// Styling
 </style>
