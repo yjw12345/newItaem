@@ -1,33 +1,17 @@
 <template>
-  <div class="Disk" ref="Disk">
-    <div
-      class="turntable"
-      :style="tableCss"
-      ref="turntable"
-      @mousedown="tableDown"
-    >
+  <div id="backend">
+    <div class="Disk" ref="Disk">
       <div
-        class="ball"
-        v-for="(item, index) in colorList"
-        :key="index"
-        :style="item"
+        class="turntable"
+        :style="tableCss"
+        ref="turntable"
+        @mousedown="tableDown"
       >
-        <img
-          draggable="false"
-          v-if="index < headList.length - 2"
-          :src="headList[index]"
-          alt=""
-          srcset=""
-        />
-      </div>
-    </div>
-    <div class="CardShow">
-      <div class="cardList" @mousedown="ListDown" :style="ListCss">
         <div
-          class="card"
+          class="ball"
           v-for="(item, index) in colorList"
-          :style="item"
           :key="index"
+          :style="item"
         >
           <img
             draggable="false"
@@ -36,42 +20,35 @@
             alt=""
             srcset=""
           />
-          <p class="name">唐奕泽</p>
-          <p class="nickName">310</p>
-          <p class="phone">453912245</p>
-          <p class="detail">
-            我就是江湖上人见人爱花见花开车见车载，人称上天入地无所不能英俊潇洒风流倜傥玉树临风学富五车高大威猛拥有千万‘粉丝’迷倒万千少女,号称一朵梨花压海棠的玉面小白龙，帅到掉榨!
-          </p>
-          <p class="love">打篮球</p>
-          <p class="proverb">键盘敲烂，月薪过万</p>
-          <p class="target">华工&暨大</p>
         </div>
       </div>
-    </div>
-  </div>
-  <div class="pac-man">
-    <!-- <div class="feed">
-      <div class="feed-wrapper" ref="feedWrapper">
-        <div v-for="(item,index) in feedList" :key="index">
-          <img :src="getLogoUrl(item)" alt="" :id="index" class="feed-item">
+      <div class="CardShow">
+        <div class="cardList" @mousedown="ListDown" :style="ListCss">
+          <div
+            class="card"
+            v-for="(item, index) in colorList"
+            :style="item"
+            :key="index"
+          >
+            <img
+              draggable="false"
+              v-if="index < headList.length - 2"
+              :src="headList[index]"
+              alt=""
+              srcset=""
+            />
+            <p class="name">唐奕泽</p>
+            <p class="nickName">310</p>
+            <p class="phone">453912245</p>
+            <p class="detail">
+              我就是江湖上人见人爱花见花开车见车载，人称上天入地无所不能英俊潇洒风流倜傥玉树临风学富五车高大威猛拥有千万‘粉丝’迷倒万千少女,号称一朵梨花压海棠的玉面小白龙，帅到掉榨!
+            </p>
+            <p class="love">打篮球</p>
+            <p class="proverb">键盘敲烂，月薪过万</p>
+            <p class="target">华工&暨大</p>
+          </div>
         </div>
       </div>
-    </div> -->
-    <div class="slider">
-      <div class="slide-track">
-        <div v-for="(item,index) in feedList" :key="index" class="slide">
-          <img :src="getLogoUrl(item)" alt="" :id="index" class="feed-item">
-        </div>
-      </div>
-    </div>
-    <div class="pacman-total">
-      <div class="pacman-top"></div>
-      <div class="pacman-bottom"></div>
-    </div>
-    <div class="money">
-      <p>the more you learn,the more you gain</p>
-      <div class="count">${{money}}</div>
-
     </div>
   </div>
 </template>
@@ -79,6 +56,8 @@
 <script setup lang='ts'>
 import { reactive, Ref, ref } from "@vue/reactivity";
 import { computed, onMounted } from "@vue/runtime-core";
+import * as Infor from "./infor.json";
+console.log(Infor);
 const imgList = ["黄徽冠", "奕泽", "元润", "远健", "振壹"];
 const colorList = reactive([
   "background-image: linear-gradient(to top, #fddb92 0%, #d1fdff 100%);",
@@ -88,7 +67,7 @@ const colorList = reactive([
   "background-image: linear-gradient(to top, #7028e4 0%, #e5b2ca 100%);",
   "background-image: linear-gradient(to top, #0c3483 0%, #a2b6df 100%, #6b8cce 100%, #a2b6df 100%);",
 ]);
-const headList = [];
+const headList: any = [];
 const Disk: Ref<HTMLElement | null> = ref(null);
 
 // const headList: any[] = [];
@@ -108,10 +87,6 @@ function getImageUrl(name: string) {
 }
 let tupian = getImageUrl("黄徽冠");
 
-onMounted(() => {
-  console.log(tupian);
-});
-
 /* 后端技术栈logo*/
 /*-----------Start------------ */
 const getLogoUrl = (name: String) => {
@@ -129,7 +104,6 @@ const feedList: any[] = [
   "spring.png",
   "mysql.jpg",
 ];
-const money: Ref<HTMLElement | any> = ref(3000);
 
 /*-----------End----------- */
 // 获取圆心的位置
@@ -148,7 +122,6 @@ let turnflag = false;
 const turntable: Ref<HTMLElement | null> = ref(null);
 
 onMounted(() => {
-  console.log(turntable.value);
   circle.X = turntable.value!.offsetLeft + 60 + Disk.value!.offsetLeft;
   circle.Y = turntable.value!.offsetTop + 60 + Disk.value!.offsetTop;
   console.log(circle);
@@ -165,10 +138,12 @@ function getAngle(x: number, y: number) {
   }
   return ret;
 }
+
 const tableCss = computed(() => {
   const time = turnflag ? "transition-duration:500ms;" : "";
   return `transform:rotate(${data.deg + "deg"});` + time;
 });
+
 function tableDown(e: MouseEvent) {
   console.log(circle);
   turnflag = false;
@@ -188,15 +163,18 @@ function tableDown(e: MouseEvent) {
   document?.addEventListener("mousemove", move);
   document?.addEventListener("mouseup", Up);
 }
+
 function tableRestore() {
   turnflag = true;
   setTimeout(() => {
     data.deg = Math.round((data.deg % 360) / 60) * 60;
   }, 50);
 }
+
 // 默认数量为6
 // 初始化lastX
 // 这个radius不是半径，可以理解为旋转周期，移动300px就更换60deg
+
 let flag = false;
 const ListCss = computed(() => {
   const time = flag ? "transition-duration:500ms;" : "";
@@ -236,7 +214,17 @@ function restore() {
 // @function ball($num){
 //   @return 60*$num
 // }
-
+// @mixin ball($num) {
+//   .ball:nth-of-type($num) {
+//     transform: rotate($num * 60deg) translateX(183px) translateY(22px);
+//   }
+// }
+// @include ball(1);
+// @include ball(2);
+// @include ball(3);
+// @include ball(4);
+// @include ball(5);
+// @include ball(6);
 div.Disk {
   width: 400px;
   height: 400px;
@@ -283,7 +271,7 @@ div.Disk {
 .CardShow {
   $Width: 300px;
   $Height: 380px;
-  border-radius: 14px;  
+  border-radius: 14px;
   width: $Width;
   height: $Height;
   overflow: hidden;
@@ -328,154 +316,5 @@ div.Disk {
       box-shadow: 0 0 30px #169fe6;
     }
   }
-}
-/* pacman's css */
-.pac-man {
-  display: flex;
-  width: 1200px;
-  margin: 0 auto;
-  margin-bottom: 200px;
-}
-.pacman-total {
-  margin-top: 100px;
-  z-index: 999;
-}
-.pacman-top {
-  background-color: yellow;
-  height: 100px;
-  width: 200px;
-  border-radius: 100px 100px 0 0;
-  animation: spin1 0.5s infinite linear;
-}
-
-.pacman-bottom {
-  background-color: yellow;
-  height: 100px;
-  width: 200px;
-  border-radius: 0 0 100px 100px;
-  animation: spin2 0.5s infinite linear;
-}
-/*pacman's animation*/
-@keyframes spin2 {
-  0% {
-    transform: rotate(0deg);
-  }
-  50% {
-    transform: rotate(-35deg);
-  }
-}
-@keyframes spin1 {
-  0% {
-    transform: rotate(0deg);
-  }
-  50% {
-    transform: rotate(35deg);
-  }
-}
-
-@-moz-keyframes spin2 {
-  0% {
-    transform: rotate(0deg);
-  }
-  50% {
-    transform: rotate(-35deg);
-  }
-}
-@-moz-keyframes spin1 {
-  0% {
-    transform: rotate(0deg);
-  }
-  50% {
-    transform: rotate(35deg);
-  }
-}
-
-@-webkit-keyframes spin2 {
-  0% {
-    transform: rotate(0deg);
-  }
-  50% {
-    transform: rotate(-35deg);
-  }
-}
-@-webkit-keyframes spin1 {
-  0% {
-    transform: rotate(0deg);
-  }
-  50% {
-    transform: rotate(35deg);
-  }
-}
-
-@mixin white-gradient {
-  background: linear-gradient(
-    to right,
-    rgba(255, 255, 255, 1) 0%,
-    rgba(255, 255, 255, 0) 100%
-  );
-}
-
-$animationSpeed: 10s;
-
-// Animation
-@keyframes scroll {
-  100% {
-    transform: translateX(0);
-  }
-  0% {
-    transform: translateX(calc(-250px * 5));
-  }
-}
-// Styling
-.slider {
-  background: white;
-  //box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.125);
-  height: 100px;
-  overflow: hidden;
-  position: relative;
-  width: 660px;
-  margin-top: 130px;
-  &::before,
-  &::after {
-    @include white-gradient;
-    content: "";
-    height: 100px;
-    position: absolute;
-    width: 200px;
-    z-index: 2;
-  }
-
-  &::after {
-    right: 0;
-    top: 0;
-    transform: rotateZ(180deg);
-  }
-
-  &::before {
-    left: 0;
-    top: 0;
-  }
-
-  .slide-track {
-    animation: scroll $animationSpeed linear infinite;
-    display: flex;
-    width: calc(250px * 14);
-  }
-
-  .slide {
-    height: 100px;
-    width: 250px;
-    img {
-      width: 100px;
-      height: 100px;
-      margin: 0 20px;
-      // transform: translateX(-50px);
-    }
-  }
-}
-.money {
-  font-size: 30px;
-  font-weight: 700;
-  margin-top: 100px;
 }
 </style>

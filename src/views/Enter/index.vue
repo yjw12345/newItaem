@@ -7,7 +7,7 @@
 </div>
 </template>
 
-<script setup lang='ts'>
+<script setup>
 import DoorAnimation from "@/components/EnterComponentns/DoorAnimation.vue";
 import EnterDoor from "@/components/EnterComponentns/EnterDoor.vue";
 import Planet from "@/components/EnterComponentns/Planet.vue";
