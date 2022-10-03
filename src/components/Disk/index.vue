@@ -112,7 +112,6 @@ onMounted(() => {
   console.log(tupian);
 });
 
-
 /* 后端技术栈logo*/
 /*-----------Start------------ */
 const getLogoUrl = (name: String) => {
@@ -172,7 +171,6 @@ const tableCss = computed(() => {
 });
 function tableDown(e: MouseEvent) {
   console.log(circle);
-
   turnflag = false;
   const table = turntable.value;
   let ret = getAngle(e.pageX - circle.X, e.pageY - circle.Y);
@@ -331,7 +329,6 @@ div.Disk {
     }
   }
 }
-
 /* pacman's css */
 .pac-man {
   display: flex;
@@ -343,7 +340,6 @@ div.Disk {
   margin-top: 100px;
   z-index: 999;
 }
-
 .pacman-top {
   background-color: yellow;
   height: 100px;

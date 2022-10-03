@@ -21,6 +21,11 @@ const router = createRouter({
       component: Enter
     },
     {
+      path: '/TimeLine',
+      name: 'TimeLine', 
+      component: TimeLine
+    },
+    {
       path: '/frontend',
       name: 'Frontend',
       component: Frontend

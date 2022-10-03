@@ -81,8 +81,6 @@ const developer = reactive([
   { name: "策划", personName: "吴远健" },
   { name: "策划", personName: "吴远健" },
 ]);
-console.log(gongzhonghao);
-
 const qrcode = reactive([{ name: "公众号二维码", src: gongzhonghao }]);
 </script>
 

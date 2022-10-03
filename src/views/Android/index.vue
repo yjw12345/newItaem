@@ -81,7 +81,8 @@
     <div>
       <canvas id="canvas" ref="canvas"></canvas>
     </div>
-    <div class="LogoRain" ref="LogoList">
+    <div class="LogoRain" ref="LogoList" >
+
       <img src="@/assets/软件logo/unnamed(1).webp" alt="" />
       <img src="@/assets/软件logo/unnamed(2).webp" alt="" />
       <img src="@/assets/软件logo/unnamed(3).webp" alt="" />
@@ -241,7 +242,6 @@ onMounted(() => {
     function (callback) {
       window.setTimeout(callback, 1000 / 60);
     };
-
   var canvas,
     ctx,
     w,
