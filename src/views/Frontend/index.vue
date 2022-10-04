@@ -1,5 +1,5 @@
 <template>
-  <div class="Frontend">
+  <div id="Frontend">
     <div id="zzsc">
       <canvas id="canvas"></canvas>
     </div>
@@ -8,6 +8,7 @@
     </div>
     <Live2d></Live2d>
     <Yinghua></Yinghua>
+    <DescribeFE />
   </div>
 </template>
 
@@ -15,6 +16,7 @@
 import Live2d from "@/components/Live2d.vue";
 import Zdog from "zdog";
 import Yinghua from "@/components/Yinghua.vue";
+import DescribeFE from "../../components/DescribeFE/index.vue";
 import { ref } from "@vue/reactivity";
 import { onMounted } from "@vue/runtime-core";
 onMounted(() => {
@@ -999,7 +1001,7 @@ onMounted(() => {
 </script>
 
 <style lang='scss' scoped>
-div.Frontend {
+div#Frontend {
   height: 100vh;
   // background-image:  url("@/assets/background.jpg")  ;
   #zzsc {

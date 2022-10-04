@@ -1,42 +1,15 @@
 <template>
   <div id="backend">
     <div class="Disk" ref="Disk">
-      <div
-        class="turntable"
-        :style="tableCss"
-        ref="turntable"
-        @mousedown="tableDown"
-      >
-        <div
-          class="ball"
-          v-for="(item, index) in colorList"
-          :key="index"
-          :style="item"
-        >
-          <img
-            draggable="false"
-            v-if="index < headList.length - 2"
-            :src="headList[index]"
-            alt=""
-            srcset=""
-          />
+      <div class="turntable" :style="tableCss" ref="turntable" @mousedown="tableDown">
+        <div class="ball" v-for="(item, index) in colorList" :key="index" :style="item">
+          <img draggable="false" v-if="index < headList.length - 2" :src="headList[index]" alt="" srcset="" />
         </div>
       </div>
       <div class="CardShow">
         <div class="cardList" @mousedown="ListDown" :style="ListCss">
-          <div
-            class="card"
-            v-for="(item, index) in colorList"
-            :style="item"
-            :key="index"
-          >
-            <img
-              draggable="false"
-              v-if="index < headList.length - 2"
-              :src="headList[index]"
-              alt=""
-              srcset=""
-            />
+          <div class="card" v-for="(item, index) in colorList" :style="item" :key="index">
+            <img draggable="false" v-if="index < headList.length - 2" :src="headList[index]" alt="" srcset="" />
             <p class="name">唐奕泽</p>
             <p class="nickName">310</p>
             <p class="phone">453912245</p>
@@ -225,6 +198,9 @@ function restore() {
 // @include ball(4);
 // @include ball(5);
 // @include ball(6);
+  $Width: 120px;
+  $half-Width:60px;
+  /* 此处修改是因为vsc命令行报错`$Width/2`,看着难受 */
 div.Disk {
   width: 400px;
   height: 400px;
@@ -232,7 +208,6 @@ div.Disk {
   position: relative;
 }
 .turntable {
-  $Width: 120px;
   position: absolute;
   z-index: 10;
   left: -60px;
@@ -251,7 +226,7 @@ div.Disk {
     height: $ballWidth;
     border-radius: 50%;
     background: #169fe6;
-    transform-origin: $Width/2 $Width/2;
+    transform-origin: $half-Width $half-Width;
     img {
       width: 100%;
       height: 100%;
