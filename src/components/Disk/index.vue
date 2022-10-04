@@ -42,7 +42,7 @@ const colorList = reactive([
   "background-image: linear-gradient(to top, #7028e4 0%, #e5b2ca 100%);",
   "background-image: linear-gradient(to top, #0c3483 0%, #a2b6df 100%, #6b8cce 100%, #a2b6df 100%);",
 ]);
-const headList = [];
+const headList:any = [];
 const Disk: Ref<HTMLElement | null> = ref(null);
 // 这一串都是给headlist加入图像地址，这里面弄这么复杂主要是因为防止展示的师兄的数量没有达到六的情况
 for (let i = 0; i < imgList.length; i++) {
