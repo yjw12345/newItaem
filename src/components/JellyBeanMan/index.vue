@@ -57,7 +57,6 @@ onMounted(() => {
       timer = setInterval(addMoney, 5);
     }, 2200);
     const time = ((1080 / 1800) * 8000) / 9;
-    console.log(time);
     for (let i = 0; i < imgList.length; i++) {
       const el = imgList[imgList.length - i - 1];
       setTimeout(() => {

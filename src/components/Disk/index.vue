@@ -29,9 +29,11 @@
 <script setup lang='ts'>
 import { reactive, Ref, ref } from "@vue/reactivity";
 import { computed, onMounted } from "@vue/runtime-core";
-import * as Infor from "./infor.json";
-console.log(Infor);
-const imgList = ["黄徽冠", "奕泽", "元润", "远健", "振壹"];
+import Infor from "./infor.json";
+function otherImg(href: string) {
+  return new URL(href, import.meta.url).href;
+}
+const imgList = ["元润", "奕泽", "振壹", "黄徽冠", "远健", "黄捷宇"];
 const colorList = reactive([
   "background-image: linear-gradient(to top, #fddb92 0%, #d1fdff 100%);",
   "background-image: linear-gradient(to top, #a18cd1 0%, #fbc2eb 100%);",
@@ -40,26 +42,23 @@ const colorList = reactive([
   "background-image: linear-gradient(to top, #7028e4 0%, #e5b2ca 100%);",
   "background-image: linear-gradient(to top, #0c3483 0%, #a2b6df 100%, #6b8cce 100%, #a2b6df 100%);",
 ]);
-const headList: any = [];
+const headList = [];
 const Disk: Ref<HTMLElement | null> = ref(null);
-
-// const headList: any[] = [];
+// 这一串都是给headlist加入图像地址，这里面弄这么复杂主要是因为防止展示的师兄的数量没有达到六的情况
 for (let i = 0; i < imgList.length; i++) {
   const el = imgList[i];
   headList.push(getImageUrl(el));
 }
-for (let i = imgList.length; i < colorList.length; i++) {
-  const el = colorList[i];
-  headList.push(el);
-}
-if (imgList.length < 6) {
-  headList.push(colorList);
-}
+// for (let i = imgList.length; i < colorList.length; i++) {
+//   const el = colorList[i];
+//   headList.push(el);
+// }
+// if (imgList.length < 6) {
+//   headList.push(colorList);
+// }
 function getImageUrl(name: string) {
   return new URL(`./后端头像/${name}.jpg`, import.meta.url).href;
 }
-let tupian = getImageUrl("黄徽冠");
-
 /* 后端技术栈logo*/
 /*-----------Start------------ */
 const getLogoUrl = (name: String) => {
@@ -88,7 +87,9 @@ const data = reactive({
   lastX: 1,
   radius: 5,
   deg: 0,
+  position: 0,
 });
+
 const circle: Circle = { X: 1, Y: 1 };
 // 转盘的flag
 let turnflag = false;
@@ -97,7 +98,7 @@ const turntable: Ref<HTMLElement | null> = ref(null);
 onMounted(() => {
   circle.X = turntable.value!.offsetLeft + 60 + Disk.value!.offsetLeft;
   circle.Y = turntable.value!.offsetTop + 60 + Disk.value!.offsetTop;
-  console.log(circle);
+  imgOpacityChange()
 });
 // 求角度的办法
 function getAngle(x: number, y: number) {
@@ -118,7 +119,6 @@ const tableCss = computed(() => {
 });
 
 function tableDown(e: MouseEvent) {
-  console.log(circle);
   turnflag = false;
   const table = turntable.value;
   let ret = getAngle(e.pageX - circle.X, e.pageY - circle.Y);
@@ -140,10 +140,21 @@ function tableDown(e: MouseEvent) {
 function tableRestore() {
   turnflag = true;
   setTimeout(() => {
+    data.position = Math.round((data.deg % 360) / 60);
     data.deg = Math.round((data.deg % 360) / 60) * 60;
+    imgOpacityChange()
   }, 50);
 }
-
+// 给图片弄一个显隐样式
+function imgOpacityChange() {
+  for (let i = 0; i < turntable.value!.children.length; i++) {
+    const el = turntable.value!.children[i];
+    el.classList.remove("active");
+    if (i == Math.abs(data.position)) {
+      el.classList.add("active");
+    }
+  }
+}
 // 默认数量为6
 // 初始化lastX
 // 这个radius不是半径，可以理解为旋转周期，移动300px就更换60deg
@@ -162,7 +173,6 @@ function ListDown(e: MouseEvent): void {
   const Move = function (e: MouseEvent): void {
     let moveX = e.pageX - data.lastX;
     let deg = moveX / data.radius;
-    console.log(data.deg);
     data.deg += deg;
     data.lastX = e.pageX;
   };
@@ -178,7 +188,7 @@ function restore() {
   flag = true;
   setTimeout(() => {
     data.deg = Math.round((data.deg % 360) / 60) * 60;
-    console.error(data.deg);
+    data.position = Math.round((data.deg % 360) / 60);
   }, 50);
 }
 </script>
@@ -203,10 +213,10 @@ function restore() {
   /* 此处修改是因为vsc命令行报错`$Width/2`,看着难受 */
 div.Disk {
   width: 400px;
-  height: 400px;
   margin: 0 auto;
   position: relative;
 }
+
 .turntable {
   position: absolute;
   z-index: 10;
@@ -219,7 +229,9 @@ div.Disk {
   // margin: 200px auto;
   position: relative;
   transform: rotate(180deg);
+
   .ball {
+    opacity: 0.2;
     $ballWidth: 35px;
     position: absolute;
     width: $ballWidth;
@@ -233,6 +245,10 @@ div.Disk {
       border-radius: 50%;
     }
   }
+  .active {
+    opacity: 1;
+    transition: opacity 0.5s;
+  }
   // md，这里本来想用scss生成器的，结果他妈的搞不出来
   @mixin ball($num) {
     @for $var from 1 through $num {
@@ -244,16 +260,13 @@ div.Disk {
   @include ball(6);
 }
 .CardShow {
-  $Width: 300px;
-  $Height: 380px;
+  $Width: 400px;
+  $Height: 700px;
   border-radius: 14px;
   width: $Width;
-  height: $Height;
   overflow: hidden;
   .cardList {
     position: relative;
-    // margin: 200px auto;
-    margin-right: 70px;
     width: $Width;
     height: $Height;
     transform-style: preserve-3d;
@@ -268,28 +281,52 @@ div.Disk {
       height: $Height;
       display: flex;
       flex-direction: column;
-      align-items: center;
+      // align-items: center;
       border-radius: 14px;
       box-shadow: -1px 15px 30px -12px black;
-      // box-shadow: 20px 20px 60px black, -20px -20px 60px black;
-      img {
-        width: 50px;
-        height: 50px;
-        border-radius: 50%;
+      .introduce {
+        display: flex;
+        margin-top: 50px;
+        align-items: center;
+        justify-content: center;
+        img {
+          width: 80px;
+          height: 80px;
+          border-radius: 50%;
+        }
+        div.total {
+          margin-left: 15px;
+          .name {
+            color: #b87100;
+            font-family: PingFang SC;
+            font-size: 25px;
+          }
+        }
+      }
+      .infor {
+        .detail {
+          margin: 20px;
+          span {
+            font-weight: bold;
+          }
+        }
+      }
+      .other {
+        margin: 0 auto;
+        img {
+          width: 400px;
+          height: 353px;
+        }
       }
     }
     @mixin cardSon($num) {
       @for $ing from 1 through $num {
-        div:nth-child(#{$ing}) {
+        > div:nth-child(#{$ing}) {
           transform: rotateY(($ing - 1) * 60deg) translateZ(400px);
         }
       }
     }
     @include cardSon(6);
-
-    div:hover {
-      box-shadow: 0 0 30px #169fe6;
-    }
   }
 }
 </style>
