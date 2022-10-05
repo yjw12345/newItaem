@@ -139,7 +139,9 @@ const data = reactive({
   radius: 5,
   deg: 0,
   position: 0,
+  position: 0,
 });
+
 
 const circle: Circle = { X: 1, Y: 1 };
 // 转盘的flag
@@ -192,7 +194,9 @@ function tableRestore() {
   turnflag = true;
   setTimeout(() => {
     data.position = Math.round((data.deg % 360) / 60);
+    data.position = Math.round((data.deg % 360) / 60);
     data.deg = Math.round((data.deg % 360) / 60) * 60;
+    imgOpacityChange()
     imgOpacityChange()
   }, 50);
 }
@@ -265,7 +269,9 @@ div.Disk {
   position: relative;
   transform: rotate(180deg);
 
+
   .ball {
+    opacity: 0.2;
     opacity: 0.2;
     $ballWidth: 35px;
     position: absolute;
@@ -280,6 +286,10 @@ div.Disk {
       height: 100%;
       border-radius: 50%;
     }
+  }
+  .active {
+    opacity: 1;
+    transition: opacity 0.5s;
   }
   .active {
     opacity: 1;
