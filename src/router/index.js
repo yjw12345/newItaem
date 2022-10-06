@@ -7,18 +7,24 @@ import Footer from "@/views/Footer/index.vue"
 import AI from "@/views/AI/index.vue"
 import TimeLine from "@/views/TimeLine/index.vue"
 import BackEnd from "@/views/BackEnd/index.vue"
+import UI from "@/views/UI/index.vue"
 import JellyBeanMan from "@/components/JellyBeanMan/index.vue"
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
       path: '/',
-      component: BackEnd
+      component: UI
     },
     {
       path: '/enter',
       name: 'Enter',
       component: Enter
+    },
+    {
+      path: '/ui',
+      name: 'UI',
+      component: UI
     },
     {
       path: '/TimeLine',
