@@ -93,7 +93,7 @@ const colorList = reactive([
   "background-image: linear-gradient(to top, #7028e4 0%, #e5b2ca 100%);",
   "background-image: linear-gradient(to top, #0c3483 0%, #a2b6df 100%, #6b8cce 100%, #a2b6df 100%);",
 ]);
-const headList = [];
+const headList:any = [];
 const Disk: Ref<HTMLElement | null> = ref(null);
 // 这一串都是给headlist加入图像地址，这里面弄这么复杂主要是因为防止展示的师兄的数量没有达到六的情况
 for (let i = 0; i < imgList.length; i++) {
@@ -140,6 +140,7 @@ const data = reactive({
   deg: 0,
   position: 0,
 });
+
 
 const circle: Circle = { X: 1, Y: 1 };
 // 转盘的flag
@@ -192,7 +193,9 @@ function tableRestore() {
   turnflag = true;
   setTimeout(() => {
     data.position = Math.round((data.deg % 360) / 60);
+    data.position = Math.round((data.deg % 360) / 60);
     data.deg = Math.round((data.deg % 360) / 60) * 60;
+    imgOpacityChange()
     imgOpacityChange()
   }, 50);
 }
@@ -253,6 +256,7 @@ div.Disk {
 
 .turntable {
   $Width: 120px;
+  $half-width:60px;
   position: absolute;
   z-index: 10;
   left: -60px;
@@ -265,7 +269,9 @@ div.Disk {
   position: relative;
   transform: rotate(180deg);
 
+
   .ball {
+    opacity: 0.2;
     opacity: 0.2;
     $ballWidth: 35px;
     position: absolute;
@@ -273,13 +279,17 @@ div.Disk {
     height: $ballWidth;
     border-radius: 50%;
     background: #169fe6;
-    transform-origin: $Width/2 $Width/2;
+    transform-origin: $half-width $half-width;
 
     img {
       width: 100%;
       height: 100%;
       border-radius: 50%;
     }
+  }
+  .active {
+    opacity: 1;
+    transition: opacity 0.5s;
   }
   .active {
     opacity: 1;
