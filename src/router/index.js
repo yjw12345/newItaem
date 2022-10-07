@@ -8,54 +8,67 @@ import AI from "@/views/AI/index.vue"
 import TimeLine from "@/views/TimeLine/index.vue"
 import BackEnd from "@/views/BackEnd/index.vue"
 import JellyBeanMan from "@/components/JellyBeanMan/index.vue"
+import Editor from "@/components/Editor.vue"
+import Framework from "@/components/BackEnd/Framework.vue"
+
 const router = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL),
-  routes: [
-    {
-      path: '/',
-      component: BackEnd
-    },
-    {
-      path: '/enter',
-      name: 'Enter',
-      component: Enter
-    },
-    {
-      path: '/TimeLine',
-      name: 'TimeLine',
-      component: TimeLine
-    },
-    {
-      path: '/backend',
-      name: 'BackEnd',
-      component: BackEnd
-    },
-    {
-      path: '/frontend',
-      name: 'Frontend',
-      component: Frontend
-    },
-    {
-      path: '/android',
-      name: 'Android',
-      component: Android
-    },
-    {
-      path: '/home',
-      name: 'Home',
-      component: Home
-    },
-    {
-      path: '/footer',
-      name: 'Footer',
-      component: Footer
-    },
-    {
-      path: '/ai',
-      name: 'AI',
-      component: AI
-    },
-  ]
+    history: createWebHistory(
+        import.meta.env.BASE_URL),
+    routes: [{
+            path: '/',
+            component: BackEnd
+        },
+        {
+            path: '/enter',
+            name: 'Enter',
+            component: Enter
+        },
+        {
+            path: '/TimeLine',
+            name: 'TimeLine',
+            component: TimeLine
+        },
+        {
+            path: '/backend',
+            name: 'BackEnd',
+            component: BackEnd
+        },
+        {
+            path: '/frontend',
+            name: 'Frontend',
+            component: Frontend
+        },
+        {
+            path: '/android',
+            name: 'Android',
+            component: Android
+        },
+        {
+            path: '/home',
+            name: 'Home',
+            component: Home
+        },
+        {
+            path: '/footer',
+            name: 'Footer',
+            component: Footer
+        },
+        {
+            path: '/ai',
+            name: 'AI',
+            component: AI
+        },
+        {
+            path: '/editor',
+            name: 'Editor',
+            component: Editor
+        },
+        {
+            path: '/framework',
+            name: 'Framework',
+            component: Framework
+        },
+    ]
 })
 
 export default router

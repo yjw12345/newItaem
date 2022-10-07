@@ -259,8 +259,8 @@ div.Disk {
   $half-width:60px;
   position: absolute;
   z-index: 10;
-  left: -60px;
-  top: 55px;
+  left: -129px;
+  top: 142px;
   width: $Width;
   height: $Width;
   border-radius: 50%;
