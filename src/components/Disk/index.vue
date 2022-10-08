@@ -100,15 +100,9 @@ for (let i = 0; i < imgList.length; i++) {
   const el = imgList[i];
   headList.push(getImageUrl(el));
 }
-// for (let i = imgList.length; i < colorList.length; i++) {
-//   const el = colorList[i];
-//   headList.push(el);
-// }
-// if (imgList.length < 6) {
-//   headList.push(colorList);
-// }
+
 function getImageUrl(name: string) {
-  return new URL(`./后端头像/${name}.jpg`, import.meta.url).href;
+  return new URL(`@/components/Disk/后端头像/${name}.jpg`, import.meta.url).href;
 }
 /* 后端技术栈logo*/
 /*-----------Start------------ */
@@ -248,131 +242,131 @@ function restore() {
 </script>
 
 <style lang='scss' scoped>
-div.Disk {
-  width: 400px;
-  margin: 0 auto;
-  position: relative;
-}
+// div.Disk {
+//   width: 400px;
+//   margin: 0 auto;
+//   position: relative;
+// }
 
-.turntable {
-  $Width: 120px;
-  $half-width:60px;
-  position: absolute;
-  z-index: 10;
-  left: -60px;
-  top: 55px;
-  width: $Width;
-  height: $Width;
-  border-radius: 50%;
-  background-color: black;
-  // margin: 200px auto;
-  position: relative;
-  transform: rotate(180deg);
+// .turntable {
+//   $Width: 120px;
+//   $half-width:60px;
+//   position: absolute;
+//   z-index: 10;
+//   left: -60px;
+//   top: 55px;
+//   width: $Width;
+//   height: $Width;
+//   border-radius: 50%;
+//   background-color: black;
+//   // margin: 200px auto;
+//   position: relative;
+//   transform: rotate(180deg);
 
 
-  .ball {
-    opacity: 0.2;
-    opacity: 0.2;
-    $ballWidth: 35px;
-    position: absolute;
-    width: $ballWidth;
-    height: $ballWidth;
-    border-radius: 50%;
-    background: #169fe6;
-    transform-origin: $half-width $half-width;
+//   .ball {
+//     opacity: 0.2;
+//     opacity: 0.2;
+//     $ballWidth: 35px;
+//     position: absolute;
+//     width: $ballWidth;
+//     height: $ballWidth;
+//     border-radius: 50%;
+//     background: #169fe6;
+//     transform-origin: $half-width $half-width;
 
-    img {
-      width: 100%;
-      height: 100%;
-      border-radius: 50%;
-    }
-  }
-  .active {
-    opacity: 1;
-    transition: opacity 0.5s;
-  }
-  .active {
-    opacity: 1;
-    transition: opacity 0.5s;
-  }
-  // md，这里本来想用scss生成器的，结果他妈的搞不出来
-  @mixin ball($num) {
-    @for $var from 1 through $num {
-      .ball:nth-of-type(#{$var}) {
-        transform: rotate(($var + 1) * 60deg) translateX(20px) translateY(12px);
-      }
-    }
-  }
-  @include ball(6);
-}
-.CardShow {
-  $Width: 400px;
-  $Height: 700px;
-  border-radius: 14px;
-  width: $Width;
-  overflow: hidden;
-  .cardList {
-    position: relative;
-    width: $Width;
-    height: $Height;
-    transform-style: preserve-3d;
-    &:hover {
-      animation-play-state: paused;
-    }
-    .card {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: $Width;
-      height: $Height;
-      display: flex;
-      flex-direction: column;
-      // align-items: center;
-      border-radius: 14px;
-      box-shadow: -1px 15px 30px -12px black;
-      .introduce {
-        display: flex;
-        margin-top: 50px;
-        align-items: center;
-        justify-content: center;
-        img {
-          width: 80px;
-          height: 80px;
-          border-radius: 50%;
-        }
-        div.total {
-          margin-left: 15px;
-          .name {
-            color: #b87100;
-            font-family: PingFang SC;
-            font-size: 25px;
-          }
-        }
-      }
-      .infor {
-        .detail {
-          margin: 20px;
-          span {
-            font-weight: bold;
-          }
-        }
-      }
-      .other {
-        margin: 0 auto;
-        img {
-          width: 400px;
-          height: 353px;
-        }
-      }
-    }
-    @mixin cardSon($num) {
-      @for $ing from 1 through $num {
-        > div:nth-child(#{$ing}) {
-          transform: rotateY(($ing - 1) * 60deg) translateZ(400px);
-        }
-      }
-    }
-    @include cardSon(6);
-  }
-}
+//     img {
+//       width: 100%;
+//       height: 100%;
+//       border-radius: 50%;
+//     }
+//   }
+//   .active {
+//     opacity: 1;
+//     transition: opacity 0.5s;
+//   }
+//   .active {
+//     opacity: 1;
+//     transition: opacity 0.5s;
+//   }
+//   // md，这里本来想用scss生成器的，结果他妈的搞不出来
+//   @mixin ball($num) {
+//     @for $var from 1 through $num {
+//       .ball:nth-of-type(#{$var}) {
+//         transform: rotate(($var + 1) * 60deg) translateX(20px) translateY(12px);
+//       }
+//     }
+//   }
+//   @include ball(6);
+// }
+// .CardShow {
+//   $Width: 400px;
+//   $Height: 700px;
+//   border-radius: 14px;
+//   width: $Width;
+//   overflow: hidden;
+//   .cardList {
+//     position: relative;
+//     width: $Width;
+//     height: $Height;
+//     transform-style: preserve-3d;
+//     &:hover {
+//       animation-play-state: paused;
+//     }
+//     .card {
+//       position: absolute;
+//       top: 0;
+//       left: 0;
+//       width: $Width;
+//       height: $Height;
+//       display: flex;
+//       flex-direction: column;
+//       // align-items: center;
+//       border-radius: 14px;
+//       box-shadow: -1px 15px 30px -12px black;
+//       .introduce {
+//         display: flex;
+//         margin-top: 50px;
+//         align-items: center;
+//         justify-content: center;
+//         img {
+//           width: 80px;
+//           height: 80px;
+//           border-radius: 50%;
+//         }
+//         div.total {
+//           margin-left: 15px;
+//           .name {
+//             color: #b87100;
+//             font-family: PingFang SC;
+//             font-size: 25px;
+//           }
+//         }
+//       }
+//       .infor {
+//         .detail {
+//           margin: 20px;
+//           span {
+//             font-weight: bold;
+//           }
+//         }
+//       }
+//       .other {
+//         margin: 0 auto;
+//         img {
+//           width: 400px;
+//           height: 353px;
+//         }
+//       }
+//     }
+//     @mixin cardSon($num) {
+//       @for $ing from 1 through $num {
+//         > div:nth-child(#{$ing}) {
+//           transform: rotateY(($ing - 1) * 60deg) translateZ(400px);
+//         }
+//       }
+//     }
+//     @include cardSon(6);
+//   }
+// }
 </style>
