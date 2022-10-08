@@ -102,11 +102,13 @@ onMounted(() => {
 .pacman-total {
   z-index: 999;
 }
-
-.pacman-top {
-  background-color: yellow;
+.pacman-top,
+.pacman-bottom {
   height: 120px;
   width: 240px;
+}
+.pacman-top {
+  background-color: yellow;
   border-radius: 120px 120px 0 0;
   animation: spin1 1s infinite linear;
 }
@@ -155,8 +157,6 @@ onMounted(() => {
 }
 .pacman-bottom {
   background-color: yellow;
-  height: 120px;
-  width: 240px;
   border-radius: 0 0 120px 120px;
   animation: spin2 1s infinite linear;
 }

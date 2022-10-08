@@ -148,8 +148,9 @@ let turnflag = false;
 const turntable: Ref<HTMLElement | null> = ref(null);
 
 onMounted(() => {
-  circle.X = turntable.value!.offsetLeft + 60 + Disk.value!.offsetLeft;
-  circle.Y = turntable.value!.offsetTop + 60 + Disk.value!.offsetTop;
+  circle.X = turntable.value!.offsetLeft + 60 + Disk.value!.getBoundingClientRect().left;
+  circle.Y = turntable.value!.offsetTop + 60 + Disk.value!.getBoundingClientRect().right;
+  Disk.value!.getBoundingClientRect().left
   imgOpacityChange()
 });
 // 求角度的办法

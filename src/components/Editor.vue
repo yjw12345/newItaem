@@ -106,9 +106,9 @@ export default {
         const birdLeft = bird.style.left;
         const index = birdLeft.indexOf("p");
         const nowLeft = birdLeft.substring(0, index);
-        if (evt.clientX < nowLeft) {
+        if (evt.clientX-450 <= nowLeft) {
           temp = 1;
-        } else if (evt.clientX > nowLeft) {
+        } else if (evt.clientX-450 > nowLeft) {
           temp = 0;
         }
         var x = evt.clientX,
@@ -122,7 +122,7 @@ export default {
           1000,
           function (ep) {
             bird.style.top = y0 + ep * (y - y0) + "px";
-            bird.style.left = x0 + ep * (x - x0) + "px";
+            bird.style.left = x0 + ep * (x - x0 - 450) + "px";
           },
           (p) => p * p
         );
