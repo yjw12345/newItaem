@@ -49,9 +49,9 @@ const addMoney = () => {
 onMounted(() => {
   // 1800是总位移，1080是实际动画位移时间，8000是动画发生的时间
   const imgList = slider.value!.children;
-  let timer:number;
+  let timer: number;
   function anmiation() {
-    money.value=3000
+    money.value = 3000;
     clearInterval(timer);
     setTimeout(() => {
       timer = setInterval(addMoney, 5);
@@ -84,16 +84,20 @@ onMounted(() => {
 <style lang="scss">
 #pacman {
   background-color: skyblue;
+  height: 286px;
+  margin: 10px 0 0 0;
 }
 /* pacman's css */
 .pac-man {
   display: flex;
-  position: relative;
+  position: absolute;
+  bottom: 71px;
+  left: -242px;
   width: 1200px;
-  margin: 0 auto;
+  // margin: 0 auto;
   align-items: center;
   justify-content: flex-end;
-  margin-top: 100px;
+  // margin-top: 100px;
 }
 .pacman-total {
   z-index: 999;

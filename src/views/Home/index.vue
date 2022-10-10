@@ -1,14 +1,16 @@
 <template>
   <div>
-    <h2>页面没有完工，路径转化为frontend和android可以看到其他的未完工页面</h2>
-    <h1>这个是招新群的二维码，欢迎加入</h1>
+
     <div class="Home">
-      <img src="@/assets/招新群二维码二/安卓.jpg" alt="" srcset="" />
-      <img src="@/assets/招新群二维码二/后台.jpg" alt="" srcset="" />
-      <img src="@/assets/招新群二维码二/前端.jpg" alt="" srcset="" />
-      <img src="@/assets/招新群二维码二/招新总群.jpg" alt="" srcset="" />
-      <img src="@/assets/招新群二维码二/UI.jpg" alt="" srcset="" />
-      <img src="@/assets/招新群二维码二/AI.jpg" alt="" srcset="" />
+        <div>
+          <router-link to="enter">开场动画</router-link>
+          <router-link to="TimeLine">招新时间线</router-link>
+          <router-link to="BackEnd">后台</router-link>
+          <router-link to="Frontend">前端</router-link>
+          <router-link to="Android">安卓</router-link>
+          <router-link to="AI">AI</router-link>
+          <router-link to="Footer">页脚</router-link>
+        </div>
     </div>
   </div>
 </template>
@@ -25,13 +27,23 @@ onMounted(() => {
 });
 </script>
 
-<style lang='scss'>
+<style lang='scss' scoped>
 h1 {
   font-size: 50px;
 }
 .Home {
   margin: 0 auto;
   display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  a{
+    display: block;
+    width: 200px;
+    height: 50px;
+    font-size: 40px;
+    // color: red
+  }
   img {
     margin: 0 20px;
     width: 200px;
