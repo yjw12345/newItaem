@@ -12,6 +12,7 @@ import JellyBeanMan from "@/components/JellyBeanMan/index.vue"
 import Editor from "@/components/Editor.vue"
 import Framework from "@/components/BackEnd/Framework.vue"
 
+
 const router = createRouter({
     history: createWebHistory(
         import.meta.env.BASE_URL),

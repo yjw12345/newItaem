@@ -83,14 +83,15 @@ onMounted(() => {
 
 <style lang="scss">
 #pacman {
-  background-color: skyblue;
+  // background-color: skyblue;
   height: 286px;
   margin: 10px 0 0 0;
+  // text-align: center;
+  // align-items: center;
 }
 /* pacman's css */
 .pac-man {
   display: flex;
-  position: absolute;
   bottom: 71px;
   left: -242px;
   width: 1200px;
@@ -114,8 +115,7 @@ onMounted(() => {
 }
 
 .slider {
-  position: absolute;
-  left: 0;
+  margin-top: 65px;
   background: transparent;
   height: 100px;
   overflow: hidden;
