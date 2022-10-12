@@ -34,7 +34,7 @@ onMounted(() => {
   <div id="describe">
     <div class="main">
       <div class="pic">
-        <img src="../../assets/frondEnd-tech-logo/frondend.jpg" alt="">
+        <img src="@/assets/frondEnd-tech-logo/frondend.jpg" alt="">
       </div>
       <div class="desc">
         <h1 class="title">{{text}}</h1>

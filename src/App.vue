@@ -4,7 +4,7 @@ import Footer from "@/views/Footer/index.vue"
 
 <template>
   <router-view> </router-view>
-  <Footer></Footer>
+  <!-- <Footer></Footer>   -->
 </template>
 
 <style>

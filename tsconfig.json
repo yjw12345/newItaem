@@ -22,7 +22,7 @@
     "moduleResolution": "node",
     "resolveJsonModule": true,
     // 这个应该关掉,因为没有引入的文件会是作为就脚本文件,所以报错
-    "isolatedModules": false,
+    "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
   },

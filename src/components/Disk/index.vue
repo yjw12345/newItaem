@@ -93,7 +93,7 @@ const colorList = reactive([
   "background-image: linear-gradient(to top, #7028e4 0%, #e5b2ca 100%);",
   "background-image: linear-gradient(to top, #0c3483 0%, #a2b6df 100%, #6b8cce 100%, #a2b6df 100%);",
 ]);
-const headList:any = [];
+const headList: any = [];
 const Disk: Ref<HTMLElement | null> = ref(null);
 // 这一串都是给headlist加入图像地址，这里面弄这么复杂主要是因为防止展示的师兄的数量没有达到六的情况
 for (let i = 0; i < imgList.length; i++) {
@@ -117,17 +117,18 @@ const data = reactive({
   position: 0,
 });
 
-
 const circle: Circle = { X: 1, Y: 1 };
 // 转盘的flag
 let turnflag = false;
 const turntable: Ref<HTMLElement | null> = ref(null);
 
 onMounted(() => {
-  circle.X = turntable.value!.offsetLeft + 60 + Disk.value!.getBoundingClientRect().left;
-  circle.Y = turntable.value!.offsetTop + 60 + Disk.value!.getBoundingClientRect().right;
-  Disk.value!.getBoundingClientRect().left
-  imgOpacityChange()
+  circle.X =
+    turntable.value!.offsetLeft + 60 + Disk.value!.getBoundingClientRect().left;
+  circle.Y =
+    turntable.value!.offsetTop + 60 + Disk.value!.getBoundingClientRect().right;
+  Disk.value!.getBoundingClientRect().left;
+  imgOpacityChange();
 });
 // 求角度的办法
 function getAngle(x: number, y: number) {
@@ -172,8 +173,8 @@ function tableRestore() {
     data.position = Math.round((data.deg % 360) / 60);
     data.position = Math.round((data.deg % 360) / 60);
     data.deg = Math.round((data.deg % 360) / 60) * 60;
-    imgOpacityChange()
-    imgOpacityChange()
+    imgOpacityChange();
+    imgOpacityChange();
   }, 50);
 }
 // 给图片弄一个显隐样式
@@ -229,11 +230,16 @@ div.Disk {
   width: 400px;
   margin: 0 auto;
   position: relative;
+  position: absolute;
+  left: 50%;
+  top: 43%  ;
+  transform: translateX(-50%) translateY(-50%);
+
 }
 
 .turntable {
   $Width: 120px;
-  $half-width:60px;
+  $half-width: 60px;
   position: absolute;
   z-index: 10;
   left: -60px;
@@ -245,7 +251,6 @@ div.Disk {
   // margin: 200px auto;
   position: relative;
   transform: rotate(180deg);
-
 
   .ball {
     opacity: 0.2;

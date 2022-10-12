@@ -129,12 +129,6 @@ export default {
         a1.animate();
       }, 10)
     );
-    // document.addEventListener('mousedown',function(e){
-    //   const shit = this.createElement('div')
-    //   bird.appendChild(shit)
-    //   shit.className = 'shit'
-    //   shit.id = 'shit'
-    // })
     document.addEventListener(
       "mouseup",
       debounce(function (e) {

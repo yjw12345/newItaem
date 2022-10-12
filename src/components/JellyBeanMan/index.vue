@@ -84,15 +84,15 @@ onMounted(() => {
 <style lang="scss">
 #pacman {
   background-color: skyblue;
-  height: 286px;
+  // height: 286px;
   margin: 10px 0 0 0;
+  // display: flex;
+  // align-items: center;
 }
 /* pacman's css */
 .pac-man {
+  position: relative;
   display: flex;
-  position: absolute;
-  bottom: 71px;
-  left: -242px;
   width: 1200px;
   // margin: 0 auto;
   align-items: center;
