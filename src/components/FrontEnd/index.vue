@@ -50,14 +50,16 @@ onMounted(() => {
     <section class="about section">
       <div class="about-container">
         <div class="about-data">
-          <h2 class="about-title">What is HTML?<br>
-            Let us learn about it</h2>
+          <h2 class="about-title">* 前端的基本技术栈是什么？<br>
+            &nbsp;&nbsp;&nbsp;Let us learn about it</h2>
           <p class="about-description">
-            HTML（超文本标记语言——HyperText Markup Language）是构成 Web 世界的一砖一瓦。它定义了网页内容的含义和结构。除 HTML 以外的其它技术则通常用来描述一个网页的表现与展示效果（如 CSS），或功能与行为（如 JavaScript）。
+            <strong>HTML</strong><br>（超文本标记语言HyperText Markup Language）<br>
+            <strong>CSS</strong><br> (层叠样式表Cascading Style Sheets）是一种样式表语言，用来描述 HTML 或 XML（包括如 SVG、MathML、XHTML 之类的 XML 分支语言）文档的呈现。<br>
+            <strong>JavaScript</strong><br>编程语言允许你在 Web 页面上实现复杂的功能。
           </p>
         </div>
         <div class="about-img">
-          <img src="../../assets/frondEnd-tech-logo/html.png" alt="">
+          <img src="../../assets/frondEnd-tech-logo/threeskills.png" id="threeskills" alt="">
           <!-- html's logo -->
         </div>
       </div>
@@ -65,14 +67,14 @@ onMounted(() => {
     <section class="about about-css section">
       <div class="about-container">
         <div class="about-img">
-          <img src="../../assets/frondEnd-tech-logo/css.png" alt="">
+          <img src="../../assets/frondEnd-tech-logo/frame.jpg" id="frame" alt="">
           <!-- html's logo -->
         </div>
         <div class="about-data">
-          <h2 class="about-title">What is CSS?<br>
-            Let us learn about it</h2>
+          <h2 class="about-title">* 入门前端难吗？前端的就业景如何？<br>
+            &nbsp;&nbsp;&nbsp;Let us learn about it</h2>
           <p class="about-description">
-            层叠样式表 (Cascading Style Sheets，缩写为 CSS），是一种 样式表 语言，用来描述 HTML 或 XML（包括如 SVG、MathML、XHTML 之类的 XML 分支语言）文档的呈现。CSS 描述了在屏幕、纸质、音频等其它媒体上的元素应该如何被渲染的问题。
+            前端入门比较简单，从开始学的三件套中，大部分属于记忆型，需要理解的不多。并且前端的反馈性远远大于其他方向，无论你写了什么，都会真实的反馈在页面上。前端debugger也很强，前端的错误一般可以通过控制台直接找到问题。但是高级的前端，需要精通js语言，去深入框架。目前，市场上的高级前端程序员需求仍然很大。
           </p>
         </div>
       </div>
@@ -80,14 +82,14 @@ onMounted(() => {
     <section class="about section">
       <div class="about-container">
         <div class="about-data">
-          <h2 class="about-title">What is JavaScript?<br>
-            Let us learn about it</h2>
+          <h2 class="about-title">* 团队前端成员介绍<br>
+            &nbsp;&nbsp;&nbsp;Let us learn about it</h2>
           <p class="about-description">
-            JavaScript 编程语言允许你在 Web 页面上实现复杂的功能。如果你看到一个网页不仅仅显示静态的信息，而是显示依时间更新的内容，或者交互式地图，或者 2D/3D 动画图像，或者滚动的视频播放器，等等——你基本可以确定，这需要 JavaScript 的参与。
+            团队的前端传承很久，出现了许多学习和技术方面都很优秀的师兄师姐们，如已经通过保研前往暨南大学的麦丽莹师姐，还有不少毕业进入大厂的师兄师姐们。团队的前端经常会进行讨论，一起学习，分享经验。
           </p>
         </div>
         <div class="about-img">
-          <img src="../../assets/frondEnd-tech-logo/js.png" alt="">
+          <img src="../../assets/frondEnd-tech-logo/team.jpg" id="team" alt="">
         </div>
       </div>
     </section>
@@ -99,6 +101,8 @@ onMounted(() => {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  font-family: "Roboto", sans-serif;
+
   background: -webkit-radial-gradient(
       closest-corner,
       rgba(16, 47, 70, 0) 60%,
@@ -125,6 +129,14 @@ onMounted(() => {
       width: 300px;
       margin-right: 250px;
       padding: 20px;
+      transform: scale(1);
+      transition: all 0.3s ease-in-out;
+      &:hover {
+        transform: scale(1.05);
+      }
+      img {
+        box-shadow: 0px 17px 23px rgba(0, 0, 0, 0.34);
+      }
     }
   }
 }
@@ -140,15 +152,16 @@ onMounted(() => {
     row-gap: 2.5rem;
     justify-content: space-around;
     .about-data {
-      text-align: center;
+      text-align: left;
       padding: 20px;
       .about-title {
         font-size: 30px;
       }
       .about-description {
-        width: 250px;
+        width: 300px;
         padding: 10px 0;
         font-size: 20px;
+        margin-left: 30px;
       }
     }
     .about-img {
@@ -156,6 +169,22 @@ onMounted(() => {
       column-gap: 1rem;
       align-items: center;
       justify-content: center;
+      transform: scale(1);
+      transition: all 0.3s ease-in-out;
+      &:hover {
+        transform: scale(1.05);
+      }
+      #threeskills {
+        width: 500px;
+        transform: scale(1.5);
+        box-shadow: 0px 17px 23px rgba(0, 0, 0, 0.34);
+      }
+      #frame,
+      #team {
+        width: 400px;
+        transform: scale(1.2);
+        box-shadow: 0px 17px 23px rgba(0, 0, 0, 0.34);
+      }
     }
   }
 }
