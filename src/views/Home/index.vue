@@ -19,12 +19,6 @@
 import { onMounted } from "@vue/runtime-core";
 
 // 这个报错不用理会,这是因为ts的毛病,或者说ts即使会报错也会进行编译的,他更多的是在语法的时候就进行预报,报错了,提醒你而已,并不会为难你
-onMounted(() => {
-  document.onselectstart = new Function("event.returnValue=false");
-  document.getElementsByTagName("img")[0].onmousedown = function (e) {
-    e.preventDefault();
-  };
-});
 </script>
 
 <style lang='scss' scoped>

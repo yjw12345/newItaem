@@ -7,6 +7,7 @@ import AI from "@/views/AI/index.vue"
 import TimeLine from "@/views/TimeLine/index.vue"
 import BackEnd from "@/views/BackEnd/index.vue"
 
+
 const router = createRouter({
     history: createWebHistory(
         import.meta.env.BASE_URL),
