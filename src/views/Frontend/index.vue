@@ -8,7 +8,7 @@
     </div>
     <Live2d></Live2d>
     <Yinghua></Yinghua>
-    <DescribeFE />
+    <Describe />
   </div>
 </template>
 
@@ -16,7 +16,7 @@
 import Live2d from "@/components/Live2d.vue";
 import Zdog from "zdog";
 import Yinghua from "@/components/Yinghua.vue";
-import DescribeFE from "../../components/DescribeFE/index.vue";
+import Describe from "../../components/FrontEnd/index.vue";
 import { ref } from "@vue/reactivity";
 import { onMounted } from "@vue/runtime-core";
 onMounted(() => {
