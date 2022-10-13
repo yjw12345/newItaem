@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../views/Home/index.vue'
-import Android from '../views/Android/index.vue'
+import Android from '../views/IAndroid/index.vue'
 import Enter from "@/views/Enter/index.vue"
 import Frontend from "@/views/Frontend/index.vue"
 import AI from "@/views/AI/index.vue"

@@ -13,6 +13,7 @@
         "@codemirror/lang-javascript": "^6.1.0",
         "@codemirror/lang-json": "^6.0.0",
         "@codemirror/theme-one-dark": "^6.1.0",
+        "@rollup/plugin-commonjs": "^23.0.0",
         "codemirror": "^6.0.1",
         "gsap": "^3.11.3",
         "scrollreveal": "^4.0.9",

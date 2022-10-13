@@ -11,5 +11,14 @@ export default defineConfig({
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))
     }
-  }
+  },
+  build: {
+    target: 'es2020'
+  },
+  optimizedeps: {
+    esbuildoptions: {
+      target: 'es2020'
+    }
+  },
+
 })

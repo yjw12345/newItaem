@@ -1064,7 +1064,7 @@ export default {
     sr.reveal(".footer__link ", { origin: "bottom", reset: true,distance: "70px" });
     sr.reveal(".footer__link-top ", { origin: "bottom", reset: true,distance: "70px" });
     sr.reveal(".footer__copyright", { origin: "bottom", reset: true,distance: "20px" });
-
+    
     const toTop = document.getElementsByClassName("footer__link-top")[0];
     toTop.addEventListener("click", () => {
       window.scrollTo(0, 0);

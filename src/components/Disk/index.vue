@@ -64,7 +64,7 @@
             </div>
             <div class="other" v-if="Infor[index].other">
               <img
-                :src="otherImg(Infor[index].other)"
+                :src="getOther(Infor[index].other)"
                 alt=""
                 srcset=""
                 draggable="false"
@@ -81,9 +81,6 @@
 import { reactive, Ref, ref } from "@vue/reactivity";
 import { computed, onMounted } from "@vue/runtime-core";
 import Infor from "./infor.json";
-function otherImg(href: string) {
-  return new URL(href, import.meta.url).href;
-}
 const imgList = ["元润", "奕泽", "振壹", "黄徽冠", "远健", "黄捷宇"];
 const colorList = reactive([
   "background-image: linear-gradient(to top, #fddb92 0%, #d1fdff 100%);",
@@ -100,9 +97,11 @@ for (let i = 0; i < imgList.length; i++) {
   const el = imgList[i];
   headList.push(getImageUrl(el));
 }
-
 function getImageUrl(name: string) {
-  return new URL(`./后端头像/${name}.jpg`, import.meta.url).href;
+  return new URL(`./headPortrait/${name}.jpg`, import.meta.url).href;
+}
+function getOther(name: string) {
+  return new URL(`./PrivateGoods/${name}`, import.meta.url).href;
 }
 
 // 获取圆心的位置
