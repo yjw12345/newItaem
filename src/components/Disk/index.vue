@@ -122,11 +122,9 @@ let turnflag = false;
 const turntable: Ref<HTMLElement | null> = ref(null);
 
 onMounted(() => {
-  circle.X =
-    turntable.value!.offsetLeft + 60 + Disk.value!.getBoundingClientRect().left;
+  circle.X = Disk.value!.getBoundingClientRect().left;
   circle.Y =
     turntable.value!.offsetTop + 60 + Disk.value!.getBoundingClientRect().right;
-  Disk.value!.getBoundingClientRect().left;
   imgOpacityChange();
 });
 // 求角度的办法
@@ -220,20 +218,18 @@ function restore() {
   setTimeout(() => {
     data.deg = Math.round((data.deg % 360) / 60) * 60;
     data.position = Math.round((data.deg % 360) / 60);
+    imgOpacityChange();
   }, 50);
 }
 </script>
 
 <style lang='scss' scoped>
+#backend {
+  position: relative;
+}
 div.Disk {
   width: 400px;
   margin: 0 auto;
-  position: relative;
-  position: absolute;
-  left: 50%;
-  top: 43%  ;
-  transform: translateX(-50%) translateY(-50%);
-
 }
 
 .turntable {

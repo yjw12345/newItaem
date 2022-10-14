@@ -6,6 +6,7 @@ import Frontend from "@/views/Frontend/index.vue"
 import AI from "@/views/AI/index.vue"
 import TimeLine from "@/views/TimeLine/index.vue"
 import BackEnd from "@/views/BackEnd/index.vue"
+import Home2 from "@/views/Home2/index.vue"
 
 
 const router = createRouter({
@@ -13,7 +14,7 @@ const router = createRouter({
         import.meta.env.BASE_URL),
     routes: [{
             path: '/',
-            component: Home
+            component: Home2
         },
         {
             path: '/enter',

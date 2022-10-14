@@ -1,6 +1,6 @@
 <template>
-  <div class="BOX">
-    <div class="contain">
+  <div  class="BOX">
+    <div ref="BOX" class="contain">
       <codemirror
         id="editor1"
         v-model="code"
@@ -10,10 +10,6 @@
         :indent-with-tab="true"
         :tabSize="2"
         :extensions="extensions"
-        @ready="log('ready', $event)"
-        @change="change()"
-        @focus="log('focus', $event)"
-        @blur="log('blur', $event)"
       />
     </div>
     <div id="bird" class="sprite bird1"><div id="shit" class="shit"></div></div>
@@ -21,7 +17,7 @@
 </template>
 <script>
 import { Codemirror } from "vue-codemirror";
-import { onMounted } from "@vue/runtime-core";
+import { onMounted, onUnmounted } from "@vue/runtime-core";
 // import { javascript } from "@codemirror/lang-javascript";
 import { java } from "@codemirror/lang-java";
 import { oneDark } from "@codemirror/theme-one-dark";
@@ -34,7 +30,7 @@ export default {
   setup() {
     const code = ref(`Welcome To ITAEM...`);
     const extensions = [java(), oneDark];
-
+    const BOX = ref(null);
     const style = reactive({
       position: "absolute",
       top: "67px",
@@ -47,18 +43,17 @@ export default {
     onMounted(() => {
       const editor = document.getElementById("editor1");
       const editorStyle = editor.firstChild;
-      console.log(editorStyle);
-      editorStyle.style.top=53+"px"
-      editorStyle.style.width = '77%'
-      editorStyle.style.left = 80+'px'
-      editorStyle.style.height = 451+'px'
+      editorStyle.style.top = 53 + "px";
+      editorStyle.style.width = "77%";
+      editorStyle.style.left = 80 + "px";
+      editorStyle.style.height = 451 + "px";
       editorStyle.style.backgroundColor = "transparent";
     });
     //------------------------------------------------
     // 设置小鸟扇翅膀
     var i = 0;
     var temp = 0;
-    setInterval(function () {
+    let timer=setInterval(function () {
       bird.className = `sprite bird${i++ % 3} ${
         temp == 1 ? "toLeft" : "toRight"
       }`;
@@ -99,59 +94,60 @@ export default {
     })();
     const urlLeft = "./小鸟（反）.png";
     // 监听鼠标移动事件，实现小鸟飞飞
-    document.addEventListener(
-      "mousemove",
-      debounce(function (evt) {
-        const birdLeft = bird.style.left;
-        const index = birdLeft.indexOf("p");
-        const nowLeft = birdLeft.substring(0, index);
-        if (evt.clientX-450 <= nowLeft) {
-          temp = 1;
-        } else if (evt.clientX-450 > nowLeft) {
-          temp = 0;
-        }
-        var x = evt.clientX,
-          y = evt.clientY,
-          x0 = bird.offsetLeft,
-          y0 = bird.offsetTop;
+    onMounted(() => {
+      BOX.value.addEventListener(
+        "mousemove",
+        debounce(function (evt) {
+          const birdLeft = bird.style.left;
+          const index = birdLeft.indexOf("p");
+          const nowLeft = birdLeft.substring(0, index);
+          if (evt.clientX - 450 <= nowLeft) {
+            temp = 1;
+          } else if (evt.clientX - 450 > nowLeft) {
+            temp = 0;
+          }
+          var x = evt.clientX,
+            y = evt.clientY,
+            x0 = bird.offsetLeft,
+            y0 = bird.offsetTop;
 
-        // console.log(x, y);
+          // console.log(x, y);
 
-        var a1 = new Animator(
-          1000,
-          function (ep) {
-            bird.style.top = y0 + ep * (y - y0) + "px";
-            bird.style.left = x0 + ep * (x - x0 - 450) + "px";
-          },
-          (p) => p * p
-        );
+          var a1 = new Animator(
+            1000,
+            function (ep) {
+              bird.style.top = y0 + ep * (y - y0) + "px";
+              bird.style.left = x0 + ep * (x - x0 - 450) + "px";
+            },
+            (p) => p * p
+          );
 
-        a1.animate();
-      }, 10)
-    );
-    document.addEventListener(
-      "mouseup",
-      debounce(function (e) {
-        shit.className = "shit active";
-        shit.style.visibility = "visible";
-        setTimeout(() => {
-          shit.style.visibility = "hidden";
-          shit.className = "shit";
-        }, 500);
-      }, 500)
-    );
+          a1.animate();
+        }, 10)
+      );
+      BOX.value.addEventListener(
+        "mouseup",
+        debounce(function (e) {
+          shit.className = "shit active";
+          shit.style.visibility = "visible";
+          setTimeout(() => {
+            shit.style.visibility = "hidden";
+            shit.className = "shit";
+          }, 500);
+        }, 500)
+      );
+    });
+    onUnmounted(()=>{
+      clearInterval(timer)
+    })
     return {
       code,
       extensions,
       log: console.log,
       style,
+      BOX
     };
   },
-  methods:{
-    change(){
-      const lineTol = document.getElementById
-    }
-  }
 };
 </script>
 <style lang='scss' scoped>
@@ -184,24 +180,22 @@ export default {
 // }
 #editor1 :nth-child(1) :nth-child(2) :nth-child(1) :first-child {
   // height: 100%;
-  align-items:center;
+  align-items: center;
   width: 27px;
   text-align: center;
-  flex-shrink:unset;
+  flex-shrink: unset;
   // flex-direction:unset
 }
 #editor1 :nth-child(1) :nth-child(2) :nth-child(1) :nth-child(2) {
   // height: 100%;
   width: 10px;
-  align-items:center;
-  flex-shrink:unset;
+  align-items: center;
+  flex-shrink: unset;
   // flex-direction:unset
-
 }
-#editor1 :nth-child(1) :nth-child(2) :nth-child(2){
-  flex-shrink:unset;
+#editor1 :nth-child(1) :nth-child(2) :nth-child(2) {
+  flex-shrink: unset;
   // flex-direction:unset
-
 }
 
 .sprite {

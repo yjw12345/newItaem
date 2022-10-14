@@ -79,12 +79,7 @@
           </p>
         </div>
         <div class="img">
-          <img
-            class="gif"
-            src="@/assets/安卓/特效.gif"
-            alt=""
-            srcset=""
-          />
+          <img class="gif" src="@/assets/安卓/特效.gif" alt="" srcset="" />
         </div>
       </div>
     </section>
@@ -127,6 +122,7 @@ onMounted(() => {
   font-family: 铁蒺藜体;
   src: url(@/assets/font-family/铁蒺藜体.TTF);
 }
+
 .heart {
   background-image: linear-gradient(120deg, #a6c0fe 0%, #f68084 100%);
   overflow: hidden;
@@ -176,7 +172,12 @@ onMounted(() => {
       flex-direction: column;
       .img {
         margin-top: 40px;
-        height: 800px;
+
+        img {
+          display: block;
+          width: 300px;
+          height: 600px;
+        }
       }
     }
   }
