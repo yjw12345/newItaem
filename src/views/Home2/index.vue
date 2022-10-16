@@ -12,12 +12,9 @@
             ITAEM
           </div>
         </div>
-        <div class="item">前端</div>
-        <div class="item">后端</div>
-        <div class="item">安卓</div>
-        <div class="item">UI</div>
-        <div class="item">AI</div>
-        <div class="item">招新时间线</div>
+        <div class="item" v-for="(item,index) in techList" :key="index" @mouseenter="showBookmark(index)" @mouseleave="hideBookmark">{{item.title}}
+          <img :src="getUrl(item.bookMark)" alt="" v-if="item.visible" class="book-mark">
+        </div>
       </div>
     </div>
     <!-- <img src="@/assets/navigation/前端.svg" alt=""> -->
@@ -87,9 +84,49 @@ import Group from "@/components/SwiperComponents/Group.vue";
 import Senior from "@/components/SwiperComponents/Senior.vue";
 import Activity from "@/components/SwiperComponents/Activity.vue";
 import name from "./name.json";
-import { onMounted, ref } from "@vue/runtime-core";
+import { onMounted, ref, reactive } from "@vue/runtime-core";
 const canvasElement = ref(null)
 const wrapElement = ref(null)
+const techList = reactive([{
+  title: '前端',
+  bookMark: '前端.svg',
+  visible: false
+}, {
+  title: '后端',
+  bookMark: '后台.svg',
+  visible: false
+}, {
+  title: '安卓',
+  bookMark: '安卓.svg',
+  visible: false
+}, {
+  title: 'UI',
+  bookMark: '',
+  visible: false
+}, {
+  title: 'AI',
+  bookMark: '',
+  visible: false
+}, {
+  title: '招新时间线',
+  bookMark: '',
+  visible: false
+}])
+const getUrl = (name) => {
+  return new URL(`../../assets/navigation/${name}`, import.meta.url)
+    .href;
+};
+const showBookmark = (index) => {
+  techList.forEach(val => {
+    val.visible = false
+  })
+  techList[index].visible = true
+}
+const hideBookmark = () =>{
+  techList.forEach(val => {
+    val.visible = false
+  })
+}
 onMounted(() => {
   const canvas = canvasElement.value;
   const wrap = wrapElement.value
@@ -234,18 +271,19 @@ onMounted(() => {
   justify-content: flex-start;
   position: relative;
   align-items: center;
-  .logo{
+  .logo {
     display: flex;
     align-items: center;
-    img{
+    img {
       width: 30px;
       height: 30px;
     }
-    .logo-title{
+    .logo-title {
       font-weight: 700;
       font-size: 25px;
-      padding:0 10px;
-      font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+      padding: 0 10px;
+      font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+        "Lucida Sans", Arial, sans-serif;
     }
   }
   div.item {
@@ -256,9 +294,16 @@ onMounted(() => {
     font-size: 15px;
     color: #555666;
     cursor: pointer;
+    position: relative;
   }
   div.item:hover {
     color: red;
+  }
+  /* 在此使用绝对定位调整书签位置  */
+  .book-mark {
+    position: absolute;
+    top: 60px;
+    left: 0;
   }
 }
 .troduction {
@@ -310,7 +355,8 @@ canvas {
     font-size: 25px;
   }
   p {
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+      "Lucida Sans", Arial, sans-serif;
     margin: 20px 0;
     text-align: center;
     font-size: 20px;
