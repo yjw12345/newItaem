@@ -1,5 +1,9 @@
 <template>
   <div class="qrCode">
+    <div class="title">
+      各方向招新群
+    </div>
+    <div class="wrapper">
     <swiper class="swiper" :modules="modules" :pagination="{ clickable: true }">
       <swiper-slide>
         <img src="@/assets/招新群二维码二/安卓.jpg" alt="" srcset="" />
@@ -19,7 +23,7 @@
       <swiper-slide>
         <img src="@/assets/招新群二维码二/UI.jpg" alt="" srcset="" />
       </swiper-slide>
-    </swiper>
+    </swiper></div>
   </div>
 </template>
 
@@ -53,7 +57,20 @@ img {
 }
 .qrCode {
   width: 250px;
-  height: 500px;
+  height: 350px;
+  .title{
+    font-weight: 700;
+    font-size: 20px;
+    padding: 10px 0;
+  }
+  .wrapper{
+    height: 300px;
+    overflow: hidden;
+      .swiper{
+    transform: translateY(-100px);
+  }
+  }
+
 }
 .swiper-pagination-bullet{
   background-color: white!important;

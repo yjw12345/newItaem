@@ -3,19 +3,31 @@
     <!-- <Group></Group> -->
     <!-- <Senior /> -->
     <!-- <Activity />   -->
-    <div class="direction">
-      <div class="item">前端</div>
-      <div class="item">后端</div>
-      <div class="item">安卓</div>
-      <div class="item">UI</div>
-      <div class="item">AI</div>
-      <div class="item">招新时间线</div>
+    <div class="nav">
+
+      <div class="direction">
+        <div class="logo">
+          <img src="@/assets/logo.svg" alt="">
+          <div class="logo-title">
+            ITAEM
+          </div>
+        </div>
+        <div class="item">前端</div>
+        <div class="item">后端</div>
+        <div class="item">安卓</div>
+        <div class="item">UI</div>
+        <div class="item">AI</div>
+        <div class="item">招新时间线</div>
+      </div>
     </div>
+    <!-- <img src="@/assets/navigation/前端.svg" alt=""> -->
     <div class="troduction">
-      <div class="left"><Group /></div>
+      <div class="left">
+        <Group />
+      </div>
       <div class="center">
         <div class="name">
-          <h2>关于ITAEM</h2>
+          <h2 class="title">关于ITAEM</h2>
           <p>
             艾腾团队（原ITAEM团队）成立于2011年，初创至今，团队走过了八个春秋，是数计院成立时间最为悠久的团队之一。
           </p>
@@ -23,7 +35,7 @@
           <p>艾腾团队现专注于发展两大方向，互联网方向、人工智能方向。</p>
         </div>
         <div class="explain">
-          <h2>ITAEM的含义</h2>
+          <h2 class="title">ITAEM的含义</h2>
           <p># ITAEM != ITAEM</p>
           <p>TEAM是名词队伍</p>
           <p>TEAM是动词合作</p>
@@ -34,7 +46,9 @@
           <p>不断创新 颠覆想象吧</p>
         </div>
       </div>
-      <div class="right"><Senior /></div>
+      <div class="right">
+        <Senior />
+      </div>
     </div>
     <div class="ITAEMAcitivity">
       <Activity />
@@ -53,8 +67,13 @@
       </div>
     </div> -->
     <div class="Thank">
+      <div class="title">
+        写在最后
+      </div>
       <p>
-        诚挚的感谢ITAEM历届成员，没有你们就没有现在的我们。先人种树，后人乘凉，愿你我都有光明的未来
+        诚挚的感谢
+        <strong>ITAEM</strong>
+        历届成员，没有你们就没有现在的我们。<br>先人种树，后人乘凉。<br>愿你我都有光明的未来
       </p>
       <div id="wrap" ref="wrapElement">
         <canvas id="canvas" ref="canvasElement"> canvas not support </canvas>
@@ -200,13 +219,35 @@ onMounted(() => {
   margin: 0 auto;
   display: flex;
 }
+.nav {
+  width: 100%;
+  height: 72px;
+  background: #fff;
+  align-items: center;
+  box-shadow: 0 4px 30px 0 rgb(232 232 237 / 50%);
+  .logo {
+    display: flex;
+  }
+}
 .direction {
   @include container;
   justify-content: flex-start;
-  background: #fff;
   position: relative;
-  box-shadow: 0 4px 30px 0 rgb(232 232 237 / 50%);
-  border-radius: 4px;
+  align-items: center;
+  .logo{
+    display: flex;
+    align-items: center;
+    img{
+      width: 30px;
+      height: 30px;
+    }
+    .logo-title{
+      font-weight: 700;
+      font-size: 25px;
+      padding:0 10px;
+      font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    }
+  }
   div.item {
     width: 90px;
     height: 72px;
@@ -229,6 +270,14 @@ onMounted(() => {
   .center {
     flex: 1;
     margin: 0 20px;
+    .name,
+    .explain {
+      padding: 20px;
+    }
+    .title {
+      padding: 10px 0;
+      font-size: 25px;
+    }
   }
 }
 .ITAEMAcitivity {
@@ -252,9 +301,20 @@ canvas {
   display: block;
 }
 .Thank {
-  p{
+  height: 200px;
+  .title {
+    width: 1200px;
+    margin: 0 auto;
+    margin-top: 40px;
+    font-weight: 700;
+    font-size: 25px;
+  }
+  p {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    margin: 20px 0;
     text-align: center;
-    font-size: 30px;
+    font-size: 20px;
+    line-height: 40px;
   }
 }
 </style>

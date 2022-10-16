@@ -1,5 +1,8 @@
 <template>
   <div class="Activity">
+    <div class="title">
+      精彩活动
+    </div>
     <swiper class="swiper" :modules="modules" :pagination="{ clickable: true }">
       <swiper-slide>
         <img src="@/assets/活动照/1.jpg" alt="" srcset="" />
@@ -47,6 +50,11 @@ img {
 }
 .Activity {
   width: 100%;
+  .title{
+    padding: 10px 0;
+    font-weight: 700;
+    font-size: 25px;
+  }
 }
 
 </style>

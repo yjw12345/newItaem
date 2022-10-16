@@ -1,5 +1,8 @@
 <template>
   <div class="Senior">
+    <div class="title">
+      师兄师姐微信
+    </div>
     <swiper class="swiper" :modules="modules" :pagination="{ clickable: true }">
       <swiper-slide>
         <img src="@/assets/师兄师姐的二维码/安卓.jpg" alt="" srcset="" />
@@ -49,6 +52,12 @@ img {
   height: 100%;
 }
 .Senior {
+  .title{
+    font-weight: 700;
+    font-size: 20px;
+    padding: 10px 0;
+    text-indent: 0.8em;
+  }
 }
 .swiper-pagination-bullet{
   background-color: white!important;
