@@ -4,6 +4,7 @@ import Android from '../views/IAndroid/index.vue'
 import Enter from "@/views/Enter/index.vue"
 import Frontend from "@/views/Frontend/index.vue"
 import AI from "@/views/AI/index.vue"
+import UI from "@/views/UI/index.vue"
 import TimeLine from "@/views/TimeLine/index.vue"
 import BackEnd from "@/views/BackEnd/index.vue"
 import Home2 from "@/views/Home2/index.vue"
@@ -14,12 +15,17 @@ const router = createRouter({
         import.meta.env.BASE_URL),
     routes: [{
             path: '/',
-            component: Home2
+            component: Enter
         },
         {
             path: '/enter',
             name: 'Enter',
             component: Enter
+        },
+        {
+            path: '/Home2',
+            name: 'Home2',
+            component: Home2
         },
         {
             path: '/TimeLine',
@@ -50,6 +56,11 @@ const router = createRouter({
             path: '/ai',
             name: 'AI',
             component: AI
+        },
+        {
+            path: '/ui',
+            name: 'UI',
+            component: UI
         },
     ]
 })

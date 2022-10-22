@@ -95,17 +95,17 @@
       </div>
       <div class="plateTitle">
         <img src="@/assets/uiSvg/资源234.svg" alt="" srcset="" />
-        <p style="left: 123px;"><span>团队</span>所带来的好处</p>
+        <p style="left: 123px"><span>团队</span>所带来的好处</p>
       </div>
       <div class="honor">
-        <img src="@/assets/uiSvg/emoticon/move.gif" id="dance" alt="">
-        <img src="@/assets/uiSvg/资源244.svg" class="frame" alt="">
+        <img src="@/assets/uiSvg/emoticon/move.gif" id="dance" alt="" />
+        <img src="@/assets/uiSvg/资源244.svg" class="frame" alt="" />
         <div class="reward">
-          <img src="@/assets/uiSvg/reward/黄捷宇java省二.jpg" alt="">
-          <img src="@/assets/uiSvg/reward/黄泳浩Python省三.jpg" alt="">
-          <img src="@/assets/uiSvg/reward/劳智乐c省二.jpg" alt="">
-          <img src="@/assets/uiSvg/reward/梁煜彬Python省一.jpg" alt="">
-          <img src="@/assets/uiSvg/reward/林志鹏c省二.jpg" alt="">
+          <img src="@/assets/uiSvg/reward/黄捷宇java省二.jpg" alt="" />
+          <img src="@/assets/uiSvg/reward/黄泳浩Python省三.jpg" alt="" />
+          <img src="@/assets/uiSvg/reward/劳智乐c省二.jpg" alt="" />
+          <img src="@/assets/uiSvg/reward/梁煜彬Python省一.jpg" alt="" />
+          <img src="@/assets/uiSvg/reward/林志鹏c省二.jpg" alt="" />
         </div>
       </div>
     </div>
@@ -253,7 +253,6 @@
         color: green;
       }
     }
-    
   }
   .second {
     height: 500px;
@@ -323,7 +322,7 @@
       }
     }
   }
-  .honor{
+  .honor {
     position: relative;
     z-index: 100;
     width: 1065px;
@@ -331,22 +330,22 @@
     height: 500px;
     margin-top: 40px;
     background: url(@/assets/uiSvg/background.png) no-repeat;
-    .reward{
+    .reward {
       position: absolute;
       left: 0%;
       top: 50%;
       left: 20px;
       transform: translateY(-50%);
-      img{
+      img {
         width: 200px;
       }
     }
-    img.frame{
+    img.frame {
       position: relative;
       width: 100%;
       height: 100%;
     }
-    #dance{
+    #dance {
       width: 140px;
       height: 140px;
       position: absolute;
@@ -355,6 +354,5 @@
       top: -125px;
     }
   }
-
 }
 </style>

@@ -19,7 +19,6 @@ const done = ref(false);
 function NextDoor(){
     setTimeout(() => {
         done.value=true
-        
     }, 500);
 }
 </script>

@@ -9,10 +9,12 @@
     <Live2d></Live2d>
     <Yinghua></Yinghua>
     <Describe />
+    <Footer></Footer>
   </div>
 </template>
 
 <script setup >
+import Footer from "@/views/Footer/index.vue";
 import Live2d from "@/components/Live2d.vue";
 import Zdog from "zdog";
 import Yinghua from "@/components/Yinghua.vue";

@@ -1,9 +1,9 @@
 <template>
   <div class="Senior">
     <div class="title">
-      师兄师姐微信
+      招新方向队员的微信
     </div>
-    <swiper class="swiper" :modules="modules" :pagination="{ clickable: true }">
+    <swiper class="swiper" :modules="modules" @slideChange="onSlideChange" :pagination="{ clickable: true }">
       <swiper-slide>
         <img src="@/assets/师兄师姐的二维码/安卓.jpg" alt="" srcset="" />
       </swiper-slide>
@@ -20,6 +20,7 @@
         <img src="@/assets/师兄师姐的二维码/UI.jpg" alt="" srcset="" />
       </swiper-slide>
     </swiper>
+    <p>{{showName}}</p>
   </div>
 </template>
 
@@ -29,11 +30,18 @@ import { Pagination } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/vue";
 import "swiper/css";
 import "swiper/css/pagination";
+import { SwiperEvents } from "swiper/types";
 
 export default defineComponent({
   name: "swiper-example-pagination",
   title: "Pagination",
   url: import.meta.url,
+  data() {
+    return {
+      names:["安卓王曦悦师姐","后台唐奕泽师兄","前端洪子琪师姐","AI吴远健师兄","UI郭晋师兄"],
+      showName:"安卓王曦悦师姐"
+    }
+  },
   components: {
     Swiper,
     SwiperSlide,
@@ -43,6 +51,12 @@ export default defineComponent({
       modules: [Pagination],
     };
   },
+  methods:{
+    // 找不到对应的属性
+    onSlideChange(event:any){
+     this.showName=this.names[event.activeIndex]
+    }
+  }
 });
 </script>
 
@@ -61,5 +75,10 @@ img {
 }
 .swiper-pagination-bullet{
   background-color: white!important;
+}
+p{
+  text-align: center;
+  font-size: 15px;
+  font-weight: bold;
 }
 </style>

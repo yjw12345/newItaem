@@ -16,7 +16,7 @@
         </div>
       </div>
       <div class="Join">
-        <router-link to="Home">join us? ~</router-link>
+        <router-link to="Home2">join us? ~</router-link>
       </div>
     </div>
     <!-- 然后是中间的几行文字 -->

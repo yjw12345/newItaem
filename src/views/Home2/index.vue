@@ -4,16 +4,26 @@
     <!-- <Senior /> -->
     <!-- <Activity />   -->
     <div class="nav">
-
       <div class="direction">
         <div class="logo">
-          <img src="@/assets/logo.svg" alt="">
-          <div class="logo-title">
-            ITAEM
-          </div>
+          <img src="@/assets/logo.svg" alt="" />
+          <div class="logo-title">ITAEM</div>
         </div>
-        <div class="item" v-for="(item,index) in techList" :key="index" @mouseenter="showBookmark(index)" @mouseleave="hideBookmark">{{item.title}}
-          <img :src="getUrl(item.bookMark)" alt="" v-if="item.visible" class="book-mark">
+        <div
+          class="item"
+          @click="urlTo(index)"
+          v-for="(item, index) in techList"
+          :key="index"
+          @mouseenter="showBookmark(index)"
+          @mouseleave="hideBookmark"
+        >
+          {{ item.title }}
+          <img
+            :src="getUrl(item.bookMark)"
+            alt=""
+            v-if="item.visible && item.bookMark"
+            class="book-mark"
+          />
         </div>
       </div>
     </div>
@@ -24,7 +34,12 @@
       </div>
       <div class="center">
         <div class="name">
-          <h2 class="title">关于ITAEM</h2>
+          <h2 class="title">
+            <img src="@/assets/HomeSvg/灯泡.svg" alt="" /> 关于ITAEM<img
+              src="@/assets/HomeSvg/打印机.svg"
+              alt=""
+            />
+          </h2>
           <p>
             艾腾团队（原ITAEM团队）成立于2011年，初创至今，团队走过了八个春秋，是数计院成立时间最为悠久的团队之一。
           </p>
@@ -32,7 +47,12 @@
           <p>艾腾团队现专注于发展两大方向，互联网方向、人工智能方向。</p>
         </div>
         <div class="explain">
-          <h2 class="title">ITAEM的含义</h2>
+          <h2 class="title">
+            <img src="@/assets/HomeSvg/蜡笔.svg" alt="" /> ITAEM的含义<img
+              src="@/assets/HomeSvg/木琴.svg"
+              alt=""
+            />
+          </h2>
           <p># ITAEM != ITAEM</p>
           <p>TEAM是名词队伍</p>
           <p>TEAM是动词合作</p>
@@ -64,72 +84,95 @@
       </div>
     </div> -->
     <div class="Thank">
-      <div class="title">
-        写在最后
-      </div>
+      <div class="title">写在最后</div>
       <p>
         诚挚的感谢
         <strong>ITAEM</strong>
-        历届成员，没有你们就没有现在的我们。<br>先人种树，后人乘凉。<br>愿你我都有光明的未来
+        历届成员，没有你们就没有现在的我们。<br />先人种树，后人乘凉。<br />愿你我都有光明的未来
       </p>
       <div id="wrap" ref="wrapElement">
         <canvas id="canvas" ref="canvasElement"> canvas not support </canvas>
       </div>
     </div>
   </div>
+  <div class="Love">
+    <img src="@/assets/Love.svg" alt="" srcset="">
+  </div>
+  <Footer></Footer>
 </template>
 
 <script setup >
+import Footer from "@/views/Footer/index.vue"
 import Group from "@/components/SwiperComponents/Group.vue";
 import Senior from "@/components/SwiperComponents/Senior.vue";
 import Activity from "@/components/SwiperComponents/Activity.vue";
+import { useRouter, useRoute } from "vue-router";
 import name from "./name.json";
 import { onMounted, ref, reactive } from "@vue/runtime-core";
-const canvasElement = ref(null)
-const wrapElement = ref(null)
-const techList = reactive([{
-  title: '前端',
-  bookMark: '前端.svg',
-  visible: false
-}, {
-  title: '后端',
-  bookMark: '后台.svg',
-  visible: false
-}, {
-  title: '安卓',
-  bookMark: '安卓.svg',
-  visible: false
-}, {
-  title: 'UI',
-  bookMark: '',
-  visible: false
-}, {
-  title: 'AI',
-  bookMark: '',
-  visible: false
-}, {
-  title: '招新时间线',
-  bookMark: '',
-  visible: false
-}])
+const canvasElement = ref(null);
+const wrapElement = ref(null);
+const techList = reactive([
+  {
+    title: "前端",
+    bookMark: "前端.svg",
+    visible: false,
+    url: "Frontend",
+  },
+  {
+    title: "后端",
+    bookMark: "后台.svg",
+    visible: false,
+    url: "BackEnd",
+  },
+  {
+    title: "安卓",
+    bookMark: "安卓.svg",
+    visible: false,
+    url: "Android",
+  },
+  {
+    title: "UI",
+    bookMark: "UI.svg",
+    visible: false,
+    url: "UI",
+  },
+  {
+    title: "AI",
+    bookMark: "AI.svg",
+    visible: false,
+    url: "AI",
+  },
+  {
+    title: "招新时间线",
+    visible: false,
+    url: "TimeLine",
+  },
+]);
 const getUrl = (name) => {
-  return new URL(`../../assets/navigation/${name}`, import.meta.url)
-    .href;
+  return new URL(`../../assets/navigation/${name}`, import.meta.url).href;
 };
 const showBookmark = (index) => {
-  techList.forEach(val => {
-    val.visible = false
-  })
-  techList[index].visible = true
-}
-const hideBookmark = () =>{
-  techList.forEach(val => {
-    val.visible = false
-  })
+  techList.forEach((val) => {
+    val.visible = false;
+  });
+  techList[index].visible = true;
+};
+const hideBookmark = () => {
+  techList.forEach((val) => {
+    val.visible = false;
+  });
+};
+const router = useRouter();
+const route = useRoute();
+
+function urlTo(index) {
+  router.push({
+    name: techList[index].url,
+  });
 }
 onMounted(() => {
   const canvas = canvasElement.value;
-  const wrap = wrapElement.value
+  const wrap = wrapElement.value;
   if (typeof canvas.getContext === "undefined") {
     return;
   }
@@ -215,7 +258,6 @@ onMounted(() => {
   let perticles;
   function init() {
     perticles = [];
-
     for (let i = 0; i < name.nameArray.length; i++) {
       const radius = Math.random() + 0.5;
       perticles.push(
@@ -257,6 +299,8 @@ onMounted(() => {
   display: flex;
 }
 .nav {
+  position: relative;
+  z-index: 10;
   width: 100%;
   height: 72px;
   background: #fff;
@@ -295,6 +339,12 @@ onMounted(() => {
     color: #555666;
     cursor: pointer;
     position: relative;
+    img{
+      // width: 100%;
+      width: 120px;
+      height: 190px;
+      // height: 100%;
+    }
   }
   div.item:hover {
     color: red;
@@ -315,6 +365,38 @@ onMounted(() => {
   .center {
     flex: 1;
     margin: 0 20px;
+    .name {
+      .title {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        img {
+          width: 25px;
+        }
+      }
+      p {
+        text-align: center;
+        font-size: 16px;
+        font-family: 铁蒺藜体;
+      }
+    }
+    .explain {
+      .title {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        img {
+          width: 25px;
+        }
+      }
+      p {
+        text-align: center;
+        font-size: 16px;
+        font-family: 铁蒺藜体;
+      }
+    }
     .name,
     .explain {
       padding: 20px;
@@ -346,7 +428,6 @@ canvas {
   display: block;
 }
 .Thank {
-  height: 200px;
   .title {
     width: 1200px;
     margin: 0 auto;
@@ -361,6 +442,14 @@ canvas {
     text-align: center;
     font-size: 20px;
     line-height: 40px;
+  }
+}
+.Love{
+  
+  background-color: rgb(255, 255, 255);
+  margin: 30px ;
+  img{
+    width: 100%;
   }
 }
 </style>
